@@ -1,0 +1,31 @@
+{
+  "name": "katzen48/laravel-twitch-eventsub",
+  "type": "library",
+  "require": {
+    "romanzipp/laravel-twitch": "^4.0"
+  },
+  "authors": [
+    {
+      "name": "Katzen48",
+      "email": "admin@katzen48.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "katzen48\\Twitch\\EventSub\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "katzen48\\Twitch\\EventSub\\Providers\\TwitchEventSubServiceProvider"
+      ],
+      "aliases": {
+        "TwitchEventSub": "katzen48\\Twitch\\EventSub\\Facades\\TwitchEventSub"
+      }
+    }
+  },
+  "require-dev": {
+    "illuminate/support": "^8.36"
+  }
+}
