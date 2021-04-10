@@ -16,7 +16,7 @@ class ModelEventSubscriber
 {
     public static function onCreate($model)
     {
-        foreach ($model->eventSubs as $type => $conditionParameters) {
+        foreach ($model::$eventSubs as $type => $conditionParameters) {
             /**
              * @var TwitchEventSub $eventSub
              */

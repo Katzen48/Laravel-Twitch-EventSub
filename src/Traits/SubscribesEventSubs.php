@@ -13,13 +13,15 @@ use katzen48\Twitch\EventSub\Events\ModelEventSubscriber;
 /**
  * Trait SubscribesEventSubs
  * @package katzen48\Twitch\EventSub\Traits
- *
- * @property array $eventSubs
  */
 trait SubscribesEventSubs
 {
     public static function bootSubscribesEventSubs(): void
     {
+        if(!property_exists(static::class, 'eventSubs')) {
+            return;
+        }
+
         static::created(function ($model) {
             ModelEventSubscriber::onCreate($model);
         });
