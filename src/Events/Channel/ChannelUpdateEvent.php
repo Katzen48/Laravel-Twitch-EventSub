@@ -11,7 +11,7 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class ChannelUpdateEvent extends BaseEvent
 {
-    public string $uerId;
+    public string $userId;
 
     public string $login;
 
@@ -29,7 +29,7 @@ class ChannelUpdateEvent extends BaseEvent
 
     public function parseEvent($event): void
     {
-        $this->uerId = $event['broadcaster_user_id'];
+        $this->userId = $event['broadcaster_user_id'];
         $this->login = $event['broadcaster_user_login'];
         $this->userName = $event['broadcaster_user_name'];
         $this->title = $event['title'];

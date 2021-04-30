@@ -11,16 +11,23 @@ use Carbon\CarbonInterface;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Objects\Subscription;
+use katzen48\Twitch\EventSub\Objects\Transport;
 
 class BaseEvent
 {
     use Dispatchable;
 
     public Subscription $subscription;
+    public string $id;
+    public int $retries;
+    public CarbonInterface $timestamp;
 
-    public function __construct($payload)
+    public function __construct(array $payload, string $id, int $retries, CarbonInterface $timestamp)
     {
         $this->parsePayload($payload);
+        $this->id = $id;
+        $this->retries = $retries;
+        $this->timestamp = $timestamp;
     }
 
     public function parsePayload($payload): void
@@ -42,7 +49,7 @@ class BaseEvent
         //$this->subscription->cost = $subscription['cost']; // TODO deactivated for testing purposes, as the twitch-cli does not support cost, yet
         $this->subscription->condition = $subscription['condition'];
 
-        $this->subscription->transport = new \katzen48\Twitch\EventSub\Objects\Transport;
+        $this->subscription->transport = new Transport;
         $this->subscription->transport->method = $subscription['transport']['method'];
         $this->subscription->transport->callback = $subscription['transport']['callback'];
 

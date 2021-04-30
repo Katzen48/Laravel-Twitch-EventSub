@@ -13,8 +13,11 @@ class EventSubListener
 {
     public function handle(\romanzipp\Twitch\Events\EventSubReceived $eventSub)
     {
+        /**
+         * @var $event \Illuminate\Foundation\Events\Dispatchable
+         */
         $event = EventParser::parse($eventSub->payload);
 
-        $event::dispatch($eventSub->payload);
+        $event::dispatch($eventSub->payload, $eventSub->id, $eventSub->retries, $eventSub->timestamp);
     }
 }
