@@ -2,6 +2,7 @@
   "name": "katzen48/laravel-twitch-eventsub",
   "type": "library",
   "description": "This package provides support for subscribing to Twitch EventSub. It's based on laravel-twitch and fully compatible.",
+  "license": "MIT",
   "require": {
     "php": "^8.0",
     "romanzipp/laravel-twitch": "^4.0.10"
