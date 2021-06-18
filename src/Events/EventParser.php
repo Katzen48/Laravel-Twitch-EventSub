@@ -44,7 +44,7 @@ class EventParser
             EventSubType::CHANNEL_UPDATE =>
                 \katzen48\Twitch\EventSub\Events\Channel\ChannelUpdateEvent::class,
             EventSubType::CHANNEL_SUBSCRIBE =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelSubscriptionGiftEvent::class,
+                \katzen48\Twitch\EventSub\Events\Channel\ChannelSubscribeEvent::class,
             EventSubType::CHANNEL_UNSUBSCRIBE => // TODO change to EventSubType::CHANNEL_SUBSCRIPTION_END
                 \katzen48\Twitch\EventSub\Events\Channel\ChannelUnsubscribeEvent::class,
             'channel.subscription.gift' => // TODO change to EventSubType::CHANNEL_SUBSCRIPTION_GIFT
