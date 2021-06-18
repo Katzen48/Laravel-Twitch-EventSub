@@ -49,13 +49,13 @@ received events are parsed into dedicated events classes, which event listeners 
 
 To subscribe to an event, first create a listener with ``php artisan make:listener <Name>`` and add the event it should
 subscribe to as a parameter to the ``handle()`` function.
+
 ```php
 <?php
 
 namespace App\Listeners;
 
-use Illuminate\Support\Facades\Log;
-use katzen48\Twitch\EventSub\Events\Channel\ChannelSubscribeEvent;
+use katzen48\Twitch\EventSub\Events\Channel\ChannelSubscriptionGiftEvent;
 
 class SubscriptionListener
 {
@@ -75,7 +75,7 @@ class SubscriptionListener
      * @param  object  $event
      * @return void
      */
-    public function handle(ChannelSubscribeEvent $event)
+    public function handle(ChannelSubscriptionGiftEvent $event)
     {
         // Do something
     }
@@ -83,6 +83,7 @@ class SubscriptionListener
 ```
 
 To bind the listener to an event, add the listener to the ``$listen`` array in your **EventServiceProvider**
+
 ```php
 <?php
 
@@ -92,7 +93,7 @@ use App\Listeners\SubscriptionListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use katzen48\Twitch\EventSub\Events\Channel\ChannelSubscribeEvent;
+use katzen48\Twitch\EventSub\Events\Channel\ChannelSubscriptionGiftEvent;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -105,7 +106,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        ChannelSubscribeEvent::class => [ // The Event, to subscribe to
+        ChannelSubscriptionGiftEvent::class => [ // The Event, to subscribe to
             SubscriptionListener::class, // The Listener
         ],
     ];

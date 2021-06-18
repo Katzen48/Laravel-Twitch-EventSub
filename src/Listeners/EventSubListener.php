@@ -3,6 +3,7 @@
 namespace katzen48\Twitch\EventSub\Listeners;
 
 use katzen48\Twitch\EventSub\Events\EventParser;
+use romanzipp\Twitch\Events\EventSubReceived;
 
 /**
  * User: Katzen48
@@ -11,7 +12,7 @@ use katzen48\Twitch\EventSub\Events\EventParser;
  */
 class EventSubListener
 {
-    public function handle(\romanzipp\Twitch\Events\EventSubReceived $eventSub)
+    public function handle(EventSubReceived $eventSub)
     {
         /**
          * @var $event \Illuminate\Foundation\Events\Dispatchable
