@@ -14,7 +14,7 @@ use katzen48\Twitch\EventSub\TwitchEventSub as TwitchEventSubService;
  * Class TwitchEventSub
  * @package katzen48\Twitch\EventSub\Facades
  *
- * @method static string|null subscribeEvent(string $type, string $version, array $condition, string $callbackUrl = null)
+ * @method static string|null subscribeEvent(string $type, string $version, array $condition, bool $batching = false, string $callbackUrl = null)
  * @method static bool unsubscribeEvent(string $subscriptionId)
  */
 class TwitchEventSub extends Facade

@@ -36,6 +36,8 @@ class BaseEvent
 
         if (array_key_exists('event', $payload)) {
             $this->parseEvent($payload['event']);
+        } else if(array_key_exists('events', $payload)) {
+            $this->parseEvent($payload['events']);
         }
     }
 

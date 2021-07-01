@@ -24,12 +24,13 @@ class TwitchEventSub
      * @param string $type
      * @param string $version
      * @param array $condition
+     * @param bool $batching
      * @param string|null $callbackUrl
-     * @return string ID of the subscription
+     * @return string|null ID of the subscription
      */
-    public function subscribeEvent(string $type, string $version, array $condition, string $callbackUrl = null): ?string
+    public function subscribeEvent(string $type, string $version, array $condition, bool $batching = false, string $callbackUrl = null): ?string
     {
-        $result = $this->twitch->subscribeEventSub([], [
+        $sub = [
             'type' => $type,
             'version' => $version,
             'condition' => $condition,
@@ -37,14 +38,24 @@ class TwitchEventSub
                 'method' => 'webhook',
                 'callback' => rtrim(config('app.url'), '/') . ($callbackUrl ?: config('twitch-eventsub.callback_url')),
             ],
-        ]);
+        ];
+
+        if($this->doesEventAllowBatching($type)) {
+            $sub['is_batching_enabled'] = $batching;
+        }
+
+        if($this->doesEventRequireBatching($type)) {
+            $sub['is_batching_enabled'] = true;
+        }
+
+        $result = $this->twitch->subscribeEventSub([], $sub);
 
         if ($result->success()) {
             return $result->data()[0]->id;
-        } else {
-            Log::error($result->getErrorMessage());
-            return null;
         }
+
+        Log::error($result->getErrorMessage());
+        return null;
     }
 
     public function unsubscribeEvent(string $subscriptionId): bool
@@ -53,9 +64,24 @@ class TwitchEventSub
 
         if ($result->success()) {
             return true;
-        } else {
-            Log::error($result->getErrorMessage());
-            return false;
         }
+
+        Log::error($result->getErrorMessage());
+        return false;
+    }
+
+    public function doesEventAllowBatching(string $type): bool
+    {
+        return match($type) {
+            default => false,
+        };
+    }
+
+    public function doesEventRequireBatching(string $type): bool
+    {
+        return match($type) {
+            'drop.entitlement.grant' => true,
+            default => false,
+        };
     }
 }

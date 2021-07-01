@@ -92,6 +92,11 @@ class EventParser
             EventSubType::EXTENSION_BITS_TRANSACTION_CREATE =>
                 \katzen48\Twitch\EventSub\Events\Extension\ExtensionBitsTransactionCreateEvent::class,
 
+            'drop.entitlement.grant' => // TODO change to EventSubType::DROP_ENTITLEMENT_GRANT
+                \katzen48\Twitch\EventSub\Events\Drop\DropEntitlementGrantEvent::class,
+
+            'user.authorization.grant' => // TODO change to EventSubType::USER_AUTHORIZATION_GRANT
+                \katzen48\Twitch\EventSub\Events\User\UserAuthorizationGrantEvent::class,
             EventSubType::USER_AUTHORIZATION_REVOKE =>
                 \katzen48\Twitch\EventSub\Events\User\UserAuthorizationRevokeEvent::class,
             EventSubType::USER_UPDATE =>
