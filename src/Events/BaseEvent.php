@@ -60,12 +60,12 @@ class BaseEvent
 
     protected function parseCarbon($timestamp): CarbonInterface
     {
-        preg_match('/^(?<pre>[\d\-:.T]+)\.(?<nano>\d{6,9})Z$/', $timestamp, $matches);
+        if (preg_match('/\.([\d]{9,})Z$/', $timestamp, $match)) {
+            $length = strlen($match[1]) - 8;
+            $timestamp = substr_replace($timestamp, '', ($length * -1) - 1, $length);
+        }
 
-        return Carbon::createFromFormat(
-            'Y-m-d\TH:i:s.u\Z',
-            sprintf('%s.%dZ', $matches['pre'], substr($matches['nano'], 0, 6))
-        );
+        return Carbon::parse($timestamp, 'UTC');
     }
 
     public function parseEvent($event): void
