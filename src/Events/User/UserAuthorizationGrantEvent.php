@@ -8,9 +8,12 @@
 namespace katzen48\Twitch\EventSub\Events\User;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class UserAuthorizationGrantEvent extends BaseEvent
 {
+    public const type = EventSubType::USER_AUTHORIZATION_GRANT;
+
     public string $clientId;
 
     public string $userId;
@@ -25,5 +28,12 @@ class UserAuthorizationGrantEvent extends BaseEvent
         $this->userId = $event['user_id'];
         $this->userLogin = $event['user_login'];
         $this->userName = $event['user_name'];
+    }
+
+    public function subscribe(string $clientId = null, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'client_id' => $clientId ?? \katzen48\Twitch\EventSub\Facades\TwitchEventSub::getClientId(),
+        ], false, $callbackUrl);
     }
 }

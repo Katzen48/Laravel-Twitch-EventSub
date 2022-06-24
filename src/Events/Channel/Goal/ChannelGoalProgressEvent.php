@@ -12,6 +12,8 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class ChannelGoalProgressEvent extends BaseEvent
 {
+    public const type = 'channel.goal.progress'; // TODO change to EventSubType::CHANNEL_GOAL_PROGRESS
+
     public string $id;
 
     public string $broadcasterId;
@@ -59,5 +61,12 @@ class ChannelGoalProgressEvent extends BaseEvent
     public function isNewSubscription(): bool
     {
         return $this->type === 'new_subscription';
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

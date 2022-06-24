@@ -19,4 +19,9 @@ class CallbackVerificationEvent extends BaseEvent
 
         $this->challenge = $payload['challenge'];
     }
+
+    public function parseEvent($event): void
+    {
+        // Not Implemented
+    }
 }

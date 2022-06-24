@@ -8,9 +8,12 @@
 namespace katzen48\Twitch\EventSub\Events\Channel;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelCheerEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_CHEER;
+
     public bool $anonymous;
 
     public string $cheererId;
@@ -40,5 +43,12 @@ class ChannelCheerEvent extends BaseEvent
         $this->broadcasterName = $event['broadcaster_user_name'];
         $this->message = $event['message'];
         $this->bits = $event['bits'];
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

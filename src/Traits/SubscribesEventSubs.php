@@ -11,6 +11,8 @@ use katzen48\Twitch\EventSub\Events\ModelEventSubscriber;
 
 /**
  * Trait SubscribesEventSubs
+ *
+ * @property $eventSubs array
  */
 trait SubscribesEventSubs
 {

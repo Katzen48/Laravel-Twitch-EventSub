@@ -12,9 +12,12 @@ use Illuminate\Support\Collection;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\ChannelPredictionOutcomeProgressed;
 use katzen48\Twitch\EventSub\Objects\ChannelPredictionPredictor;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelPredictionLockEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_PREDICTION_LOCK;
+
     public string $id;
 
     public string $broadcasterId;
@@ -68,5 +71,12 @@ class ChannelPredictionLockEvent extends BaseEvent
 
         $this->startedAt = $this->parseCarbon($event['started_at']);
         $this->lockedAt = $this->parseCarbon($event['locked_at']);
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

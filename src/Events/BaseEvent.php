@@ -13,9 +13,9 @@ use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Objects\Subscription;
 use katzen48\Twitch\EventSub\Objects\Transport;
 
-class BaseEvent
+abstract class BaseEvent
 {
-    use Dispatchable;
+    use Dispatchable, HasEventType;
 
     public Subscription $subscription;
 
@@ -51,7 +51,7 @@ class BaseEvent
         $this->subscription->status = $subscription['status'];
         $this->subscription->type = $subscription['type'];
         $this->subscription->version = $subscription['version'];
-        //$this->subscription->cost = $subscription['cost']; // TODO deactivated for testing purposes, as the twitch-cli does not support cost, yet
+        $this->subscription->cost = $subscription['cost'];
         $this->subscription->condition = $subscription['condition'];
 
         $this->subscription->transport = new Transport;
@@ -71,7 +71,5 @@ class BaseEvent
         return Carbon::parse($timestamp, 'UTC');
     }
 
-    public function parseEvent($event): void
-    {
-    }
+    abstract public function parseEvent($event): void;
 }

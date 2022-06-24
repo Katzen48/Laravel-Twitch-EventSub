@@ -8,9 +8,12 @@
 namespace katzen48\Twitch\EventSub\Events\Channel\Subscription;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelSubscriptionMessageEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_SUBSCRIPTION_MESSAGE;
+
     public string $subscriberId;
 
     public string $subscriberLogin;
@@ -46,5 +49,12 @@ class ChannelSubscriptionMessageEvent extends BaseEvent
         $this->cumulativeMonths = $event['cumulative_months'];
         $this->streakMonths = $event['streak_months'];
         $this->durationMonths = $event['duration_months'];
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

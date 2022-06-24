@@ -12,9 +12,12 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\ChannelPointsRedemptionCooldown;
 use katzen48\Twitch\EventSub\Objects\ChannelPointsRedemptionLimit;
 use katzen48\Twitch\EventSub\Objects\TwitchCdnImage;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelPointsCustomRewardAddEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_ADD;
+
     public string $rewardId;
 
     public string $broadcasterId;
@@ -95,5 +98,12 @@ class ChannelPointsCustomRewardAddEvent extends BaseEvent
         $this->defaultImage->url1x = $event['default_image']['url_1x'];
         $this->defaultImage->url2x = $event['default_image']['url_2x'];
         $this->defaultImage->url4x = $event['default_image']['url_4x'];
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }
