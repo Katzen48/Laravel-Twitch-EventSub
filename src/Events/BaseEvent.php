@@ -51,7 +51,7 @@ class BaseEvent
         $this->subscription->status = $subscription['status'];
         $this->subscription->type = $subscription['type'];
         $this->subscription->version = $subscription['version'];
-        //$this->subscription->cost = $subscription['cost']; // TODO deactivated for testing purposes, as the twitch-cli does not support cost, yet
+        $this->subscription->cost = $subscription['cost'];
         $this->subscription->condition = $subscription['condition'];
 
         $this->subscription->transport = new Transport;
