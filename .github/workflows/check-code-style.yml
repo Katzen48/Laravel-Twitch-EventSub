@@ -1,0 +1,16 @@
+name: Check Code Style
+on: [pull_request]
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    name: Run Laravel Pint
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress
+
+      - name: Check code style
+        run: ./vendor/bin/pint --test --preset laravel

@@ -11,7 +11,6 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class ChannelRaidEvent extends BaseEvent
 {
-
     public string $fromBroadcasterId;
 
     public string $fromBroadcasterLogin;

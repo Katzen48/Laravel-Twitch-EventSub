@@ -7,8 +7,6 @@
 
 namespace katzen48\Twitch\EventSub\Events\User;
 
-use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class UserUpdateEvent extends BaseEvent

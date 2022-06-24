@@ -18,8 +18,11 @@ class BaseEvent
     use Dispatchable;
 
     public Subscription $subscription;
+
     public string $id;
+
     public int $retries;
+
     public CarbonInterface $timestamp;
 
     public function __construct(array $payload, string $id, int $retries, CarbonInterface $timestamp)
@@ -36,7 +39,7 @@ class BaseEvent
 
         if (array_key_exists('event', $payload)) {
             $this->parseEvent($payload['event']);
-        } else if(array_key_exists('events', $payload)) {
+        } elseif (array_key_exists('events', $payload)) {
             $this->parseEvent($payload['events']);
         }
     }
@@ -70,6 +73,5 @@ class BaseEvent
 
     public function parseEvent($event): void
     {
-
     }
 }

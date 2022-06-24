@@ -8,7 +8,6 @@
 namespace katzen48\Twitch\EventSub\Events\Channel;
 
 use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class ChannelFollowEvent extends BaseEvent
@@ -26,7 +25,6 @@ class ChannelFollowEvent extends BaseEvent
     public string $broadcasterName;
 
     public CarbonInterface $followedAt;
-
 
     public function parseEvent($event): void
     {

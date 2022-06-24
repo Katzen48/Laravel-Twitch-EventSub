@@ -25,7 +25,7 @@ class ChannelHypeTrainEndEvent extends BaseEvent
     public int $total;
 
     /**
-     * @var Collection|HypeTrainContribution $topContributions
+     * @var Collection|HypeTrainContribution
      */
     public $topContributions;
 

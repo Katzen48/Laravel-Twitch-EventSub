@@ -7,9 +7,9 @@
 
 namespace katzen48\Twitch\EventSub\Objects;
 
-
 class ChannelPointsRedemptionCooldown
 {
     public bool $enabled;
+
     public int $seconds;
 }

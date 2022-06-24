@@ -18,7 +18,7 @@ class TwitchEventSubServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->publishes([
-            dirname(__DIR__) . '/../config/twitch-eventsub.php' => config_path('twitch-eventsub.php'),
+            dirname(__DIR__).'/../config/twitch-eventsub.php' => config_path('twitch-eventsub.php'),
         ], 'config');
 
         /**
@@ -32,7 +32,7 @@ class TwitchEventSubServiceProvider extends \Illuminate\Support\ServiceProvider
             }
         }
 
-        $this->loadRoutesFrom(__DIR__ . '/../routes/twitch-eventsub.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/twitch-eventsub.php');
     }
 
     public function register()
@@ -40,7 +40,7 @@ class TwitchEventSubServiceProvider extends \Illuminate\Support\ServiceProvider
         parent::register();
 
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/../config/twitch-eventsub.php', 'twitch-eventsub'
+            dirname(__DIR__).'/../config/twitch-eventsub.php', 'twitch-eventsub'
         );
 
         $this->app->singleton(TwitchEventSub::class, function () {

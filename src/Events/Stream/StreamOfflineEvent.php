@@ -7,8 +7,6 @@
 
 namespace katzen48\Twitch\EventSub\Events\Stream;
 
-use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class StreamOfflineEvent extends BaseEvent

@@ -27,7 +27,7 @@ class ChannelHypeTrainBeginEvent extends BaseEvent
     public int $goal;
 
     /**
-     * @var Collection|HypeTrainContribution $topContributions
+     * @var Collection|HypeTrainContribution
      */
     public $topContributions;
 
