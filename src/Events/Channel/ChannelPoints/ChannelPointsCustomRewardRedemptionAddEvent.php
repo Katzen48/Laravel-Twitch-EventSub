@@ -5,14 +5,13 @@
  * Time: 3:28 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events\Channel;
+namespace katzen48\Twitch\EventSub\Events\Channel\ChannelPoints;
 
 use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\ChannelPointsCustomRewardPart;
 
-class ChannelPointsCustomRewardRedemptionUpdateEvent extends BaseEvent
+class ChannelPointsCustomRewardRedemptionAddEvent extends BaseEvent
 {
     public string $redemptionId;
 
@@ -38,7 +37,7 @@ class ChannelPointsCustomRewardRedemptionUpdateEvent extends BaseEvent
 
     public function parseEvent($event): void
     {
-        $this->redeemerId = $event['id'];
+        $this->redemptionId = $event['id'];
         $this->broadcasterId = $event['broadcaster_user_id'];
         $this->broadcasterLogin = $event['broadcaster_user_login'];
         $this->broadcasterName = $event['broadcaster_user_name'];

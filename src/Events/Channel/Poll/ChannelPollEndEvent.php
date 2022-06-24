@@ -5,7 +5,7 @@
  * Time: 2:59 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events\Channel;
+namespace katzen48\Twitch\EventSub\Events\Channel\Poll;
 
 use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;

@@ -39,13 +39,13 @@ class EventParser
             EventSubType::CHANNEL_UPDATE =>
                 \katzen48\Twitch\EventSub\Events\Channel\ChannelUpdateEvent::class,
             EventSubType::CHANNEL_SUBSCRIBE =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelSubscribeEvent::class,
+                Channel\Subscription\ChannelSubscribeEvent::class,
             EventSubType::CHANNEL_SUBSCRIPTION_END =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelUnsubscribeEvent::class,
+                Channel\Subscription\ChannelSubscriptionEndEvent::class,
             EventSubType::CHANNEL_SUBSCRIPTION_GIFT =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelSubscriptionGiftEvent::class,
+                Channel\Subscription\ChannelSubscriptionGiftEvent::class,
             EventSubType::CHANNEL_SUBSCRIPTION_MESSAGE =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelSubscriptionMessageEvent::class,
+                Channel\Subscription\ChannelSubscriptionMessageEvent::class,
             EventSubType::CHANNEL_CHEER =>
                 \katzen48\Twitch\EventSub\Events\Channel\ChannelCheerEvent::class,
             EventSubType::CHANNEL_RAID =>
@@ -59,43 +59,49 @@ class EventParser
             EventSubType::CHANNEL_MODERATOR_REMOVE =>
                 \katzen48\Twitch\EventSub\Events\Channel\ChannelModeratorRemoveEvent::class,
             EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_ADD =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPointsCustomRewardAddEvent::class,
+                Channel\ChannelPoints\ChannelPointsCustomRewardAddEvent::class,
             EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_UPDATE =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPointsCustomRewardUpdateEvent::class,
+                Channel\ChannelPoints\ChannelPointsCustomRewardUpdateEvent::class,
             EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_REMOVE =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPointsCustomRewardRemoveEvent::class,
+                Channel\ChannelPoints\ChannelPointsCustomRewardRemoveEvent::class,
             EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPointsCustomRewardRedemptionAddEvent::class,
+                Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionAddEvent::class,
             EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_UPDATE =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPointsCustomRewardRedemptionUpdateEvent::class,
+                Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionUpdateEvent::class,
             EventSubType::CHANNEL_POLL_BEGIN =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPollBeginEvent::class,
+                Channel\Poll\ChannelPollBeginEvent::class,
             EventSubType::CHANNEL_POLL_PROGRESS =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPollProgressEvent::class,
+                Channel\Poll\ChannelPollProgressEvent::class,
             EventSubType::CHANNEL_POLL_END =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPollEndEvent::class,
+                Channel\Poll\ChannelPollEndEvent::class,
             EventSubType::CHANNEL_PREDICTION_BEGIN =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPredictionBeginEvent::class,
+                Channel\Prediction\ChannelPredictionBeginEvent::class,
             EventSubType::CHANNEL_PREDICTION_PROGRESS =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPredictionProgressEvent::class,
+                Channel\Prediction\ChannelPredictionProgressEvent::class,
             EventSubType::CHANNEL_PREDICTION_LOCK =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPredictionLockEvent::class,
+                Channel\Prediction\ChannelPredictionLockEvent::class,
             EventSubType::CHANNEL_PREDICTION_END =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelPredictionEndEvent::class,
+                Channel\Prediction\ChannelPredictionEndEvent::class,
             EventSubType::CHANNEL_HYPE_TRAIN_BEGIN =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelHypeTrainBeginEvent::class,
+                Channel\HypeTrain\ChannelHypeTrainBeginEvent::class,
             EventSubType::CHANNEL_HYPE_TRAIN_PROGRESS =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelHypeTrainProgressEvent::class,
+                Channel\HypeTrain\ChannelHypeTrainProgressEvent::class,
             EventSubType::CHANNEL_HYPE_TRAIN_END =>
-                \katzen48\Twitch\EventSub\Events\Channel\ChannelHypeTrainEndEvent::class,
+                Channel\HypeTrain\ChannelHypeTrainEndEvent::class,
+            'channel.goal.begin' => // TODO change to EventSubType::CHANNEL_GOAL_BEGIN
+            Channel\Goal\ChannelGoalBeginEvent::class,
+            'channel.goal.progress' => // TODO change to EventSubType::CHANNEL_GOAL_PROGRESS
+                Channel\Goal\ChannelGoalProgressEvent::class,
+            'channel.goal.end' => // TODO change to EventSubType::CHANNEL_GOAL_END
+                Channel\Goal\ChannelGoalEndEvent::class,
 
             EventSubType::EXTENSION_BITS_TRANSACTION_CREATE =>
                 \katzen48\Twitch\EventSub\Events\Extension\ExtensionBitsTransactionCreateEvent::class,
 
-            'drop.entitlement.grant' => // TODO change to EventSubType::DROP_ENTITLEMENT_GRANT
+            EventSubType::DROP_ENTITLEMENT_GRANT =>
                 \katzen48\Twitch\EventSub\Events\Drop\DropEntitlementGrantEvent::class,
 
-            'user.authorization.grant' => // TODO change to EventSubType::USER_AUTHORIZATION_GRANT
+            EventSubType::USER_AUTHORIZATION_GRANT =>
                 \katzen48\Twitch\EventSub\Events\User\UserAuthorizationGrantEvent::class,
             EventSubType::USER_AUTHORIZATION_REVOKE =>
                 \katzen48\Twitch\EventSub\Events\User\UserAuthorizationRevokeEvent::class,

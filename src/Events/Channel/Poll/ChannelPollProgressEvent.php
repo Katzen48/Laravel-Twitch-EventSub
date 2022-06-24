@@ -5,15 +5,15 @@
  * Time: 2:59 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events\Channel;
+namespace katzen48\Twitch\EventSub\Events\Channel\Poll;
 
 use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use katzen48\Twitch\EventSub\Objects\ChannelPollChoiceProgressed;
 use katzen48\Twitch\EventSub\Objects\ChannelPollCurrencyVoting;
-use katzen48\Twitch\EventSub\Objects\ChannelPollChoice;
 
-class ChannelPollBeginEvent extends BaseEvent
+class ChannelPollProgressEvent extends BaseEvent
 {
     public string $id;
 
@@ -26,7 +26,7 @@ class ChannelPollBeginEvent extends BaseEvent
     public string $title;
 
     /**
-     * @var Collection|ChannelPollChoice
+     * @var Collection|ChannelPollChoiceProgressed
      */
     public $choices;
 
@@ -48,9 +48,12 @@ class ChannelPollBeginEvent extends BaseEvent
 
         $this->choices = collect();
         foreach ($event['choices'] as $item) {
-            $choice = new ChannelPollChoice();
+            $choice = new ChannelPollChoiceProgressed();
             $choice->id = $item['id'];
             $choice->title = $item['title'];
+            $choice->bitsVotes = $item['bits_votes'];
+            $choice->channelPointsVotes = $item['channel_points_votes'];
+            $choice->votes = $item['votes'];
 
             $this->choices->add($choice);
         }

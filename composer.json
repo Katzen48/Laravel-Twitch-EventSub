@@ -29,6 +29,7 @@
     }
   },
   "require-dev": {
-    "laravel/framework": "^v8.0"
+    "laravel/framework": "^v8.0",
+    "laravel/pint": "^0.2.0"
   }
 }

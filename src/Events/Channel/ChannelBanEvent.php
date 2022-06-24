@@ -33,6 +33,8 @@ class ChannelBanEvent extends BaseEvent
 
     public string $reason;
 
+    public CarbonInterface $bannedAt;
+
     public CarbonInterface $endsAt;
 
     public bool $permanent;
@@ -49,7 +51,8 @@ class ChannelBanEvent extends BaseEvent
         $this->moderatorLogin = $event['moderator_user_login'];
         $this->moderatorName = $event['moderator_user_name'];
         $this->reason = $event['reason'];
-        $this->endsAt = $this->parseCarbon($event['followed_at']);
+        $this->bannedAt = $this->parseCarbon($event['banned_at']);
+        $this->endsAt = $this->parseCarbon($event['ends_at']);
         $this->permanent = $event['is_permanent'];
     }
 }

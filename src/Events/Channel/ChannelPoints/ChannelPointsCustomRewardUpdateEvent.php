@@ -5,16 +5,15 @@
  * Time: 3:28 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events\Channel;
+namespace katzen48\Twitch\EventSub\Events\Channel\ChannelPoints;
 
 use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\ChannelPointsRedemptionCooldown;
 use katzen48\Twitch\EventSub\Objects\ChannelPointsRedemptionLimit;
 use katzen48\Twitch\EventSub\Objects\TwitchCdnImage;
 
-class ChannelPointsCustomRewardAddEvent extends BaseEvent
+class ChannelPointsCustomRewardUpdateEvent extends BaseEvent
 {
     public string $rewardId;
 

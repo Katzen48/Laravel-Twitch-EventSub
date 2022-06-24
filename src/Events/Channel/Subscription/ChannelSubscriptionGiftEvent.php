@@ -5,11 +5,11 @@
  * Time: 3:28 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events\Channel;
+namespace katzen48\Twitch\EventSub\Events\Channel\Subscription;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 
-class ChannelSubscriptionMessageEvent extends BaseEvent
+class ChannelSubscriptionGiftEvent extends BaseEvent
 {
     public string $subscriberId;
 
@@ -23,15 +23,13 @@ class ChannelSubscriptionMessageEvent extends BaseEvent
 
     public string $broadcasterName;
 
+    public int $total;
+
     public string $tier;
 
-    public mixed $message;
+    public int $cumulativeTotal;
 
-    public int $cumulativeMonths;
-
-    public int $streakMonths;
-
-    public int $durationMonths;
+    public bool $anonymous;
 
     public function parseEvent($event): void
     {
@@ -41,10 +39,9 @@ class ChannelSubscriptionMessageEvent extends BaseEvent
         $this->broadcasterId = $event['broadcaster_user_id'];
         $this->broadcasterLogin = $event['broadcaster_user_login'];
         $this->broadcasterName = $event['broadcaster_user_name'];
+        $this->total = $event['total'];
         $this->tier = $event['tier'];
-        $this->message = $event['message'];
-        $this->cumulativeMonths = $event['cumulative_months'];
-        $this->streakMonths = $event['streak_months'];
-        $this->durationMonths = $event['duration_months'];
+        $this->cumulativeTotal = $event['cumulative_total'];
+        $this->anonymous = $event['is_anonymous'];
     }
 }
