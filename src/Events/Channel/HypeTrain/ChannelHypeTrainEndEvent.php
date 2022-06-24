@@ -5,15 +5,14 @@
  * Time: 3:28 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events\Channel;
+namespace katzen48\Twitch\EventSub\Events\Channel\HypeTrain;
 
 use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\HypeTrainContribution;
 
-class ChannelHypeTrainProgressEvent extends BaseEvent
+class ChannelHypeTrainEndEvent extends BaseEvent
 {
     public string $broadcasterId;
 
@@ -25,20 +24,16 @@ class ChannelHypeTrainProgressEvent extends BaseEvent
 
     public int $total;
 
-    public int $progress;
-
-    public int $goal;
-
     /**
-     * @var Collection|HypeTrainContribution $topContributions
+     * @var Collection|HypeTrainContribution
      */
     public $topContributions;
 
-    public HypeTrainContribution $lastContribution;
-
     public CarbonInterface $startedAt;
 
-    public CarbonInterface $expiresAt;
+    public CarbonInterface $endedAt;
+
+    public CarbonInterface $cooldownEndsAt;
 
     public function parseEvent($event): void
     {
@@ -47,10 +42,9 @@ class ChannelHypeTrainProgressEvent extends BaseEvent
         $this->broadcasterName = $event['broadcaster_user_name'];
         $this->level = $event['level'];
         $this->total = $event['total'];
-        $this->progress = $event['progress'];
-        $this->goal = $event['goal'];
         $this->startedAt = $this->parseCarbon($event['started_at']);
-        $this->expiresAt = $this->parseCarbon($event['expires_at']);
+        $this->endedAt = $this->parseCarbon($event['ended_at']);
+        $this->cooldownEndsAt = $this->parseCarbon($event['cooldown_ends_at']);
 
         $this->topContributions = collect();
         foreach ($event['top_contributions'] as $item) {
@@ -62,15 +56,6 @@ class ChannelHypeTrainProgressEvent extends BaseEvent
             $contribution->total = $item['total'];
 
             $this->topContributions->add($contribution);
-        }
-
-        if (array_key_exists('last_contribution', $event)) {
-            $this->lastContribution = new HypeTrainContribution;
-            $this->lastContribution->contributorId = $event['last_contribution']['user_id'];
-            $this->lastContribution->contributorLogin = $event['last_contribution']['user_login'];
-            $this->lastContribution->contributorName = $event['last_contribution']['user_name'];
-            $this->lastContribution->type = $event['last_contribution']['type'];
-            $this->lastContribution->total = $event['last_contribution']['total'];
         }
     }
 }

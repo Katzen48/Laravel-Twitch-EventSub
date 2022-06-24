@@ -55,7 +55,7 @@ subscribe to as a parameter to the ``handle()`` function.
 
 namespace App\Listeners;
 
-use katzen48\Twitch\EventSub\Events\Channel\ChannelSubscriptionGiftEvent;
+use katzen48\Twitch\EventSub\Events\Channel\Subscription\ChannelSubscriptionGiftEvent;
 
 class SubscriptionListener
 {
@@ -89,11 +89,7 @@ To bind the listener to an event, add the listener to the ``$listen`` array in y
 
 namespace App\Providers;
 
-use App\Listeners\SubscriptionListener;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use katzen48\Twitch\EventSub\Events\Channel\ChannelSubscriptionGiftEvent;
+use App\Listeners\SubscriptionListener;use Illuminate\Auth\Events\Registered;use Illuminate\Auth\Listeners\SendEmailVerificationNotification;use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;use katzen48\Twitch\EventSub\Events\Channel\Subscription\ChannelSubscriptionGiftEvent;
 
 class EventServiceProvider extends ServiceProvider
 {

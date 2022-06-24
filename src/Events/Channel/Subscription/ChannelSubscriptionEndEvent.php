@@ -5,11 +5,11 @@
  * Time: 3:28 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events\Channel;
+namespace katzen48\Twitch\EventSub\Events\Channel\Subscription;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 
-class ChannelSubscribeEvent extends BaseEvent
+class ChannelSubscriptionEndEvent extends BaseEvent
 {
     public string $subscriberId;
 

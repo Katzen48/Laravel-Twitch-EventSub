@@ -7,8 +7,6 @@
 
 namespace katzen48\Twitch\EventSub\Events\User;
 
-use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class UserUpdateEvent extends BaseEvent
@@ -21,6 +19,8 @@ class UserUpdateEvent extends BaseEvent
 
     public string $email;
 
+    public bool $emailVerified;
+
     public string $description;
 
     public function parseEvent($event): void
@@ -29,6 +29,7 @@ class UserUpdateEvent extends BaseEvent
         $this->userLogin = $event['user_login'];
         $this->userName = $event['user_name'];
         $this->email = $event['email'] ?? null;
+        $this->emailVerified = $event['email_verified'] ?? false;
         $this->description = $event['description'];
     }
 }

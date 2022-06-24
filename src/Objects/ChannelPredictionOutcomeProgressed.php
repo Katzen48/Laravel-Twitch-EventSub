@@ -7,7 +7,6 @@
 
 namespace katzen48\Twitch\EventSub\Objects;
 
-
 use Illuminate\Support\Collection;
 
 class ChannelPredictionOutcomeProgressed extends ChannelPredictionOutcome

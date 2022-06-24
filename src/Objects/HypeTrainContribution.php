@@ -7,12 +7,15 @@
 
 namespace katzen48\Twitch\EventSub\Objects;
 
-
 class HypeTrainContribution
 {
     public string $contributorId;
+
     public string $contributorLogin;
+
     public string $contributorName;
+
     public string $type;
+
     public int $total;
 }

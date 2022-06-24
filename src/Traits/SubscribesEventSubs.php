@@ -7,18 +7,16 @@
 
 namespace katzen48\Twitch\EventSub\Traits;
 
-
 use katzen48\Twitch\EventSub\Events\ModelEventSubscriber;
 
 /**
  * Trait SubscribesEventSubs
- * @package katzen48\Twitch\EventSub\Traits
  */
 trait SubscribesEventSubs
 {
     public static function bootSubscribesEventSubs(): void
     {
-        if(!property_exists(static::class, 'eventSubs')) {
+        if (! property_exists(static::class, 'eventSubs')) {
             return;
         }
 

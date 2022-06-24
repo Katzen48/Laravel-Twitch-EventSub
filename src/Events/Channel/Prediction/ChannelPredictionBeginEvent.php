@@ -5,15 +5,14 @@
  * Time: 2:59 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events\Channel;
+namespace katzen48\Twitch\EventSub\Events\Channel\Prediction;
 
 use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
-use katzen48\Twitch\EventSub\Objects\ChannelPredictionOutcomeProgressed;
-use katzen48\Twitch\EventSub\Objects\ChannelPredictionPredictor;
+use katzen48\Twitch\EventSub\Objects\ChannelPredictionOutcome;
 
-class ChannelPredictionProgressEvent extends BaseEvent
+class ChannelPredictionBeginEvent extends BaseEvent
 {
     public string $id;
 
@@ -26,7 +25,7 @@ class ChannelPredictionProgressEvent extends BaseEvent
     public string $title;
 
     /**
-     * @var Collection|ChannelPredictionOutcomeProgressed
+     * @var Collection|ChannelPredictionOutcome
      */
     public $outcomes;
 
@@ -44,27 +43,14 @@ class ChannelPredictionProgressEvent extends BaseEvent
 
         $this->outcomes = collect();
         foreach ($event['outcomes'] as $item) {
-            $outcome = new ChannelPredictionOutcomeProgressed();
+            $outcome = new ChannelPredictionOutcome();
             $outcome->id = $item['id'];
             $outcome->title = $item['title'];
             $outcome->color = $item['color'];
-            $outcome->users = $item['users'];
-            $outcome->channelPoints = $item['channel_points'];
-            $outcome->topPredictors = collect();
-
-            foreach ($item['top_predictors'] as $pred) {
-                $predictor = new ChannelPredictionPredictor();
-                $predictor->userName = $pred['user_name'];
-                $predictor->userLogin = $pred['user_login'];
-                $predictor->userId = $pred['user_id'];
-                $predictor->channelPointsWon = $pred['channel_points_won'];
-                $predictor->channelPointsUsed = $pred['channel_points_used'];
-
-                $outcome->topPredictors->add($predictor);
-            }
 
             $this->outcomes->add($outcome);
         }
+
         $this->startedAt = $this->parseCarbon($event['started_at']);
         $this->locksAt = $this->parseCarbon($event['locks_at']);
     }

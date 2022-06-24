@@ -7,7 +7,6 @@
 
 namespace katzen48\Twitch\EventSub\Objects;
 
-
 class ChannelPollChoiceProgressed extends ChannelPollChoice
 {
     public int $bitsVotes;

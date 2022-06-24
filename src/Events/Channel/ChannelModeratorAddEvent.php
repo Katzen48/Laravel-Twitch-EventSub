@@ -7,7 +7,6 @@
 
 namespace katzen48\Twitch\EventSub\Events\Channel;
 
-use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class ChannelModeratorAddEvent extends BaseEvent
@@ -23,7 +22,6 @@ class ChannelModeratorAddEvent extends BaseEvent
     public string $broadcasterLogin;
 
     public string $broadcasterName;
-
 
     public function parseEvent($event): void
     {

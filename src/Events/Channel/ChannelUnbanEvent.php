@@ -7,7 +7,6 @@
 
 namespace katzen48\Twitch\EventSub\Events\Channel;
 
-use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class ChannelUnbanEvent extends BaseEvent

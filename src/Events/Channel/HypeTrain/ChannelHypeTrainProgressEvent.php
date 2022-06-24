@@ -5,21 +5,22 @@
  * Time: 3:28 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events\Channel;
+namespace katzen48\Twitch\EventSub\Events\Channel\HypeTrain;
 
 use Carbon\CarbonInterface;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\HypeTrainContribution;
 
-class ChannelHypeTrainBeginEvent extends BaseEvent
+class ChannelHypeTrainProgressEvent extends BaseEvent
 {
     public string $broadcasterId;
 
     public string $broadcasterLogin;
 
     public string $broadcasterName;
+
+    public int $level;
 
     public int $total;
 
@@ -28,7 +29,7 @@ class ChannelHypeTrainBeginEvent extends BaseEvent
     public int $goal;
 
     /**
-     * @var Collection|HypeTrainContribution $topContributions
+     * @var Collection|HypeTrainContribution
      */
     public $topContributions;
 
@@ -43,6 +44,7 @@ class ChannelHypeTrainBeginEvent extends BaseEvent
         $this->broadcasterId = $event['broadcaster_user_id'];
         $this->broadcasterLogin = $event['broadcaster_user_login'];
         $this->broadcasterName = $event['broadcaster_user_name'];
+        $this->level = $event['level'];
         $this->total = $event['total'];
         $this->progress = $event['progress'];
         $this->goal = $event['goal'];

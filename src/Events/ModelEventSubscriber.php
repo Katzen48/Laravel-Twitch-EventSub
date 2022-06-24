@@ -7,7 +7,6 @@
 
 namespace katzen48\Twitch\EventSub\Events;
 
-
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use katzen48\Twitch\EventSub\TwitchEventSub;

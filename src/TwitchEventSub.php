@@ -21,11 +21,11 @@ class TwitchEventSub
     }
 
     /**
-     * @param string $type
-     * @param string $version
-     * @param array $condition
-     * @param bool $batching
-     * @param string|null $callbackUrl
+     * @param  string  $type
+     * @param  string  $version
+     * @param  array  $condition
+     * @param  bool  $batching
+     * @param  string|null  $callbackUrl
      * @return string|null ID of the subscription
      */
     public function subscribeEvent(string $type, string $version, array $condition, bool $batching = false, string $callbackUrl = null): ?string
@@ -36,15 +36,15 @@ class TwitchEventSub
             'condition' => $condition,
             'transport' => [
                 'method' => 'webhook',
-                'callback' => rtrim(config('app.url'), '/') . ($callbackUrl ?: config('twitch-eventsub.callback_url')),
+                'callback' => rtrim(config('app.url'), '/').($callbackUrl ?: config('twitch-eventsub.callback_url')),
             ],
         ];
 
-        if($this->doesEventAllowBatching($type)) {
+        if ($this->doesEventAllowBatching($type)) {
             $sub['is_batching_enabled'] = $batching;
         }
 
-        if($this->doesEventRequireBatching($type)) {
+        if ($this->doesEventRequireBatching($type)) {
             $sub['is_batching_enabled'] = true;
         }
 
@@ -55,6 +55,7 @@ class TwitchEventSub
         }
 
         Log::error($result->getErrorMessage());
+
         return null;
     }
 
@@ -67,19 +68,20 @@ class TwitchEventSub
         }
 
         Log::error($result->getErrorMessage());
+
         return false;
     }
 
     public function doesEventAllowBatching(string $type): bool
     {
-        return match($type) {
+        return match ($type) {
             default => false,
         };
     }
 
     public function doesEventRequireBatching(string $type): bool
     {
-        return match($type) {
+        return match ($type) {
             'drop.entitlement.grant' => true,
             default => false,
         };

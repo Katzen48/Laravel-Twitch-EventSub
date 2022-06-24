@@ -7,10 +7,7 @@
 
 namespace katzen48\Twitch\EventSub\Objects;
 
-
 use Carbon\CarbonInterface;
-use katzen48\Twitch\EventSub\Enums\SubscriptionStatus;
-use romanzipp\Twitch\Enums\EventSubType;
 
 class Subscription
 {
