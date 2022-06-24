@@ -9,9 +9,12 @@ namespace katzen48\Twitch\EventSub\Events\Stream;
 
 use Carbon\CarbonInterface;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class StreamOnlineEvent extends BaseEvent
 {
+    public const type = EventSubType::STREAM_ONLINE;
+
     public string $streamId;
 
     public string $broadcasterId;
@@ -32,5 +35,12 @@ class StreamOnlineEvent extends BaseEvent
         $this->broadcasterName = $event['broadcaster_user_name'];
         $this->type = $event['type'];
         $this->startedAt = $this->parseCarbon($event['started_at']);
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

@@ -8,9 +8,12 @@
 namespace katzen48\Twitch\EventSub\Events\Extension;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ExtensionBitsTransactionCreateEvent extends BaseEvent
 {
+    public const type = EventSubType::EXTENSION_BITS_TRANSACTION_CREATE;
+
     public string $extensionClientId;
 
     public string $userId;
@@ -37,5 +40,12 @@ class ExtensionBitsTransactionCreateEvent extends BaseEvent
         $this->broadcasterLogin = $event['broadcaster_user_login'];
         $this->broadcasterName = $event['broadcaster_user_name'];
         $this->product = $event['product'];
+    }
+
+    public function subscribe(string $extensionClientId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'extension_client_id' => $extensionClientId,
+        ], false, $callbackUrl);
     }
 }

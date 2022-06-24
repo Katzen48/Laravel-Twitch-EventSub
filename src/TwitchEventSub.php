@@ -86,4 +86,9 @@ class TwitchEventSub
             default => false,
         };
     }
+
+    public function getClientId(): ?string
+    {
+        return $this->twitch->getClientId();
+    }
 }

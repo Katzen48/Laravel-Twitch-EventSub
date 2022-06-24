@@ -8,9 +8,12 @@
 namespace katzen48\Twitch\EventSub\Events\Channel;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelUnbanEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_UNBAN;
+
     public string $unbannedId;
 
     public string $unbannedLogin;
@@ -40,5 +43,12 @@ class ChannelUnbanEvent extends BaseEvent
         $this->moderatorId = $event['moderator_user_id'];
         $this->moderatorLogin = $event['moderator_user_login'];
         $this->moderatorName = $event['moderator_user_name'];
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

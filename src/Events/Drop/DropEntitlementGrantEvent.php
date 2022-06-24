@@ -11,9 +11,12 @@ use Illuminate\Support\Collection;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\DropEntitlementEvent;
 use katzen48\Twitch\EventSub\Objects\DropEntitlementEventData;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class DropEntitlementGrantEvent extends BaseEvent
 {
+    public const type = EventSubType::DROP_ENTITLEMENT_GRANT;
+
     public Collection|DropEntitlementEvent $events;
 
     public function parseEvent($event): void
@@ -37,5 +40,23 @@ class DropEntitlementGrantEvent extends BaseEvent
 
             $events->add($dropEvent);
         }
+    }
+
+    public function subscribe(string $organizationId, string $categoryId = null, string $campaignId = null, string $callbackUrl = null): ?string
+    {
+        $condition = [
+            'organization_id' => $organizationId,
+        ];
+
+        if ($categoryId) {
+            $condition['category_id'] = $categoryId;
+        }
+
+        if ($campaignId) {
+            $condition['campaign_id'] = $campaignId;
+        }
+
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1',
+            $condition, false, $callbackUrl);
     }
 }

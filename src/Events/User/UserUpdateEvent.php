@@ -8,9 +8,12 @@
 namespace katzen48\Twitch\EventSub\Events\User;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class UserUpdateEvent extends BaseEvent
 {
+    public const type = EventSubType::USER_UPDATE;
+
     public string $userId;
 
     public string $userLogin;
@@ -31,5 +34,12 @@ class UserUpdateEvent extends BaseEvent
         $this->email = $event['email'] ?? null;
         $this->emailVerified = $event['email_verified'] ?? false;
         $this->description = $event['description'];
+    }
+
+    public function subscribe(string $userId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'user_id' => $userId,
+        ], false, $callbackUrl);
     }
 }

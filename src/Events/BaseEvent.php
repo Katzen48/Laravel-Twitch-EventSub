@@ -13,9 +13,9 @@ use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Objects\Subscription;
 use katzen48\Twitch\EventSub\Objects\Transport;
 
-class BaseEvent
+abstract class BaseEvent
 {
-    use Dispatchable;
+    use Dispatchable, HasEventType;
 
     public Subscription $subscription;
 
@@ -71,7 +71,5 @@ class BaseEvent
         return Carbon::parse($timestamp, 'UTC');
     }
 
-    public function parseEvent($event): void
-    {
-    }
+    abstract public function parseEvent($event): void;
 }

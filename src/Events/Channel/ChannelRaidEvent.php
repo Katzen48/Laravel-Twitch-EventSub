@@ -8,9 +8,12 @@
 namespace katzen48\Twitch\EventSub\Events\Channel;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelRaidEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_RAID;
+
     public string $fromBroadcasterId;
 
     public string $fromBroadcasterLogin;
@@ -34,5 +37,12 @@ class ChannelRaidEvent extends BaseEvent
         $this->toBroadcasterLogin = $event['to_broadcaster_user_login'];
         $this->toBroadcasterName = $event['to_broadcaster_user_name'];
         $this->viewers = $event['viewers'];
+    }
+
+    public function subscribe(string $broadcasterId, bool $to = false, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            sprintf('%s_broadcaster_user_id', $to ? 'to' : 'from') => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

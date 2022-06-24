@@ -11,9 +11,12 @@ use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\HypeTrainContribution;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelHypeTrainEndEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_HYPE_TRAIN_END;
+
     public string $broadcasterId;
 
     public string $broadcasterLogin;
@@ -57,5 +60,12 @@ class ChannelHypeTrainEndEvent extends BaseEvent
 
             $this->topContributions->add($contribution);
         }
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

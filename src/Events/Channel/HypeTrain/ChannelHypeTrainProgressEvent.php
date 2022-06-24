@@ -11,9 +11,12 @@ use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\HypeTrainContribution;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelHypeTrainProgressEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_HYPE_TRAIN_PROGRESS;
+
     public string $broadcasterId;
 
     public string $broadcasterLogin;
@@ -71,5 +74,12 @@ class ChannelHypeTrainProgressEvent extends BaseEvent
             $this->lastContribution->type = $event['last_contribution']['type'];
             $this->lastContribution->total = $event['last_contribution']['total'];
         }
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

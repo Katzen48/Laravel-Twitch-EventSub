@@ -8,9 +8,12 @@
 namespace katzen48\Twitch\EventSub\Events\Channel\Subscription;
 
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelSubscriptionGiftEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_SUBSCRIPTION_GIFT;
+
     public string $subscriberId;
 
     public string $subscriberLogin;
@@ -43,5 +46,12 @@ class ChannelSubscriptionGiftEvent extends BaseEvent
         $this->tier = $event['tier'];
         $this->cumulativeTotal = $event['cumulative_total'];
         $this->anonymous = $event['is_anonymous'];
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }

@@ -3,7 +3,6 @@
 namespace katzen48\Twitch\EventSub\Events;
 
 use katzen48\Twitch\EventSub\Enums\SubscriptionStatus;
-use romanzipp\Twitch\Enums\EventSubType;
 
 /**
  * User: Katzen48
@@ -16,7 +15,7 @@ class EventParser
     {
         if ($payload['subscription']['status'] !== SubscriptionStatus::ENABLED) {
             return match ($payload['subscription']['status']) {
-                SubscriptionStatus::VERIFICATION_PENDING => \katzen48\Twitch\EventSub\Events\EventSub\CallbackVerificationEvent::class,
+                SubscriptionStatus::VERIFICATION_PENDING => EventSub\CallbackVerificationEvent::class,
                 default => throw new \DomainException('Unsupported subscription status'),
             };
         }
@@ -29,50 +28,64 @@ class EventParser
     public static function getEventClassMapping(): array
     {
         return [
-            EventSubType::STREAM_ONLINE => \katzen48\Twitch\EventSub\Events\Stream\StreamOnlineEvent::class,
-            EventSubType::STREAM_OFFLINE => \katzen48\Twitch\EventSub\Events\Stream\StreamOfflineEvent::class,
+            // Stream
+            Stream\StreamOfflineEvent::type => Stream\StreamOfflineEvent::class,
+            Stream\StreamOnlineEvent::type => Stream\StreamOnlineEvent::class,
 
-            EventSubType::CHANNEL_FOLLOW => \katzen48\Twitch\EventSub\Events\Channel\ChannelFollowEvent::class,
-            EventSubType::CHANNEL_UPDATE => \katzen48\Twitch\EventSub\Events\Channel\ChannelUpdateEvent::class,
-            EventSubType::CHANNEL_SUBSCRIBE => Channel\Subscription\ChannelSubscribeEvent::class,
-            EventSubType::CHANNEL_SUBSCRIPTION_END => Channel\Subscription\ChannelSubscriptionEndEvent::class,
-            EventSubType::CHANNEL_SUBSCRIPTION_GIFT => Channel\Subscription\ChannelSubscriptionGiftEvent::class,
-            EventSubType::CHANNEL_SUBSCRIPTION_MESSAGE => Channel\Subscription\ChannelSubscriptionMessageEvent::class,
-            EventSubType::CHANNEL_CHEER => \katzen48\Twitch\EventSub\Events\Channel\ChannelCheerEvent::class,
-            EventSubType::CHANNEL_RAID => \katzen48\Twitch\EventSub\Events\Channel\ChannelRaidEvent::class,
-            EventSubType::CHANNEL_BAN => \katzen48\Twitch\EventSub\Events\Channel\ChannelBanEvent::class,
-            EventSubType::CHANNEL_UNBAN => \katzen48\Twitch\EventSub\Events\Channel\ChannelUnbanEvent::class,
-            EventSubType::CHANNEL_MODERATOR_ADD => \katzen48\Twitch\EventSub\Events\Channel\ChannelModeratorAddEvent::class,
-            EventSubType::CHANNEL_MODERATOR_REMOVE => \katzen48\Twitch\EventSub\Events\Channel\ChannelModeratorRemoveEvent::class,
-            EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_ADD => Channel\ChannelPoints\ChannelPointsCustomRewardAddEvent::class,
-            EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_UPDATE => Channel\ChannelPoints\ChannelPointsCustomRewardUpdateEvent::class,
-            EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_REMOVE => Channel\ChannelPoints\ChannelPointsCustomRewardRemoveEvent::class,
-            EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD => Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionAddEvent::class,
-            EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_UPDATE => Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionUpdateEvent::class,
-            EventSubType::CHANNEL_POLL_BEGIN => Channel\Poll\ChannelPollBeginEvent::class,
-            EventSubType::CHANNEL_POLL_PROGRESS => Channel\Poll\ChannelPollProgressEvent::class,
-            EventSubType::CHANNEL_POLL_END => Channel\Poll\ChannelPollEndEvent::class,
-            EventSubType::CHANNEL_PREDICTION_BEGIN => Channel\Prediction\ChannelPredictionBeginEvent::class,
-            EventSubType::CHANNEL_PREDICTION_PROGRESS => Channel\Prediction\ChannelPredictionProgressEvent::class,
-            EventSubType::CHANNEL_PREDICTION_LOCK => Channel\Prediction\ChannelPredictionLockEvent::class,
-            EventSubType::CHANNEL_PREDICTION_END => Channel\Prediction\ChannelPredictionEndEvent::class,
-            EventSubType::CHANNEL_HYPE_TRAIN_BEGIN => Channel\HypeTrain\ChannelHypeTrainBeginEvent::class,
-            EventSubType::CHANNEL_HYPE_TRAIN_PROGRESS => Channel\HypeTrain\ChannelHypeTrainProgressEvent::class,
-            EventSubType::CHANNEL_HYPE_TRAIN_END => Channel\HypeTrain\ChannelHypeTrainEndEvent::class,
-            'channel.goal.begin' => // TODO change to EventSubType::CHANNEL_GOAL_BEGIN
-            Channel\Goal\ChannelGoalBeginEvent::class,
-            'channel.goal.progress' => // TODO change to EventSubType::CHANNEL_GOAL_PROGRESS
-                Channel\Goal\ChannelGoalProgressEvent::class,
-            'channel.goal.end' => // TODO change to EventSubType::CHANNEL_GOAL_END
-                Channel\Goal\ChannelGoalEndEvent::class,
+            // Channel
+            Channel\ChannelBanEvent::type => Channel\ChannelBanEvent::class,
+            Channel\ChannelCheerEvent::type => Channel\ChannelCheerEvent::class,
+            Channel\ChannelFollowEvent::type => Channel\ChannelFollowEvent::class,
+            Channel\ChannelModeratorAddEvent::type => Channel\ChannelModeratorAddEvent::class,
+            Channel\ChannelModeratorRemoveEvent::type => Channel\ChannelModeratorRemoveEvent::class,
+            Channel\ChannelRaidEvent::type => Channel\ChannelRaidEvent::class,
+            Channel\ChannelUnbanEvent::type => Channel\ChannelUnbanEvent::class,
+            Channel\ChannelUpdateEvent::type => Channel\ChannelUpdateEvent::class,
 
-            EventSubType::EXTENSION_BITS_TRANSACTION_CREATE => \katzen48\Twitch\EventSub\Events\Extension\ExtensionBitsTransactionCreateEvent::class,
+            // Channel Points
+            Channel\ChannelPoints\ChannelPointsCustomRewardAddEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardAddEvent::class,
+            Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionAddEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionAddEvent::class,
+            Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionUpdateEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionUpdateEvent::class,
+            Channel\ChannelPoints\ChannelPointsCustomRewardRemoveEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardRemoveEvent::class,
+            Channel\ChannelPoints\ChannelPointsCustomRewardUpdateEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardUpdateEvent::class,
 
-            EventSubType::DROP_ENTITLEMENT_GRANT => \katzen48\Twitch\EventSub\Events\Drop\DropEntitlementGrantEvent::class,
+            // Goal
+            Channel\Goal\ChannelGoalBeginEvent::type => Channel\Goal\ChannelGoalBeginEvent::class,
+            Channel\Goal\ChannelGoalEndEvent::type => Channel\Goal\ChannelGoalEndEvent::class,
+            Channel\Goal\ChannelGoalProgressEvent::type => Channel\Goal\ChannelGoalProgressEvent::class,
 
-            EventSubType::USER_AUTHORIZATION_GRANT => \katzen48\Twitch\EventSub\Events\User\UserAuthorizationGrantEvent::class,
-            EventSubType::USER_AUTHORIZATION_REVOKE => \katzen48\Twitch\EventSub\Events\User\UserAuthorizationRevokeEvent::class,
-            EventSubType::USER_UPDATE => \katzen48\Twitch\EventSub\Events\User\UserUpdateEvent::class,
+            // Hype Train
+            Channel\HypeTrain\ChannelHypeTrainBeginEvent::type => Channel\HypeTrain\ChannelHypeTrainBeginEvent::class,
+            Channel\HypeTrain\ChannelHypeTrainEndEvent::type => Channel\HypeTrain\ChannelHypeTrainEndEvent::class,
+            Channel\HypeTrain\ChannelHypeTrainProgressEvent::type => Channel\HypeTrain\ChannelHypeTrainProgressEvent::class,
+
+            // Poll
+            Channel\Poll\ChannelPollBeginEvent::type => Channel\Poll\ChannelPollBeginEvent::class,
+            Channel\Poll\ChannelPollEndEvent::type => Channel\Poll\ChannelPollEndEvent::class,
+            Channel\Poll\ChannelPollProgressEvent::type => Channel\Poll\ChannelPollProgressEvent::class,
+
+            // Prediction
+            Channel\Prediction\ChannelPredictionBeginEvent::type => Channel\Prediction\ChannelPredictionBeginEvent::class,
+            Channel\Prediction\ChannelPredictionEndEvent::type => Channel\Prediction\ChannelPredictionEndEvent::class,
+            Channel\Prediction\ChannelPredictionLockEvent::type => Channel\Prediction\ChannelPredictionLockEvent::class,
+            Channel\Prediction\ChannelPredictionProgressEvent::type => Channel\Prediction\ChannelPredictionProgressEvent::class,
+
+            // Subscription
+            Channel\Subscription\ChannelSubscribeEvent::type => Channel\Subscription\ChannelSubscribeEvent::class,
+            Channel\Subscription\ChannelSubscriptionEndEvent::type => Channel\Subscription\ChannelSubscriptionEndEvent::class,
+            Channel\Subscription\ChannelSubscriptionGiftEvent::type => Channel\Subscription\ChannelSubscriptionGiftEvent::class,
+            Channel\Subscription\ChannelSubscriptionMessageEvent::type => Channel\Subscription\ChannelSubscriptionMessageEvent::class,
+
+            // Drop
+            Drop\DropEntitlementGrantEvent::type => Drop\DropEntitlementGrantEvent::class,
+
+            // Extension
+            Extension\ExtensionBitsTransactionCreateEvent::type => Extension\ExtensionBitsTransactionCreateEvent::class,
+
+            // User
+            User\UserAuthorizationGrantEvent::type => User\UserAuthorizationGrantEvent::class,
+            User\UserAuthorizationRevokeEvent::type => User\UserAuthorizationRevokeEvent::class,
+            User\UserUpdateEvent::type => User\UserUpdateEvent::class,
         ];
     }
 }

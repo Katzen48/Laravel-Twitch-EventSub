@@ -9,9 +9,12 @@ namespace katzen48\Twitch\EventSub\Events\Channel;
 
 use Carbon\CarbonInterface;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
+use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelFollowEvent extends BaseEvent
 {
+    public const type = EventSubType::CHANNEL_FOLLOW;
+
     public string $followerId;
 
     public string $followerLogin;
@@ -35,5 +38,12 @@ class ChannelFollowEvent extends BaseEvent
         $this->broadcasterLogin = $event['broadcaster_user_login'];
         $this->broadcasterName = $event['broadcaster_user_name'];
         $this->followedAt = $this->parseCarbon($event['followed_at']);
+    }
+
+    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+            'broadcaster_user_id' => $broadcasterId,
+        ], false, $callbackUrl);
     }
 }
