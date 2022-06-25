@@ -13,10 +13,15 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\ChannelPollChoiceProgressed;
 use katzen48\Twitch\EventSub\Objects\ChannelPollCurrencyVoting;
 use romanzipp\Twitch\Enums\EventSubType;
+use romanzipp\Twitch\Enums\Scope;
 
 class ChannelPollProgressEvent extends BaseEvent
 {
-    public const type = EventSubType::CHANNEL_POLL_PROGRESS;
+    protected static string $type = EventSubType::CHANNEL_POLL_PROGRESS;
+
+    protected static array $scopes = [
+        Scope::CHANNEL_READ_POLLS, Scope::CHANNEL_MANAGE_POLLS,
+    ];
 
     public string $id;
 
@@ -73,9 +78,9 @@ class ChannelPollProgressEvent extends BaseEvent
         $this->endsAt = $this->parseCarbon($event['ends_at']);
     }
 
-    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+        return parent::subscribeTo('1', [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

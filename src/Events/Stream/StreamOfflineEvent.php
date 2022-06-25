@@ -12,7 +12,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 
 class StreamOfflineEvent extends BaseEvent
 {
-    public const type = EventSubType::STREAM_OFFLINE;
+    protected static string $type = EventSubType::STREAM_OFFLINE;
 
     public string $broadcasterId;
 
@@ -27,9 +27,9 @@ class StreamOfflineEvent extends BaseEvent
         $this->broadcasterName = $event['broadcaster_user_name'];
     }
 
-    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+        return parent::subscribeTo('1', [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

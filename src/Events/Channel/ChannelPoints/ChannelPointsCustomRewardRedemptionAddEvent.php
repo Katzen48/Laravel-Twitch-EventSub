@@ -11,10 +11,15 @@ use Carbon\CarbonInterface;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\ChannelPointsCustomRewardPart;
 use romanzipp\Twitch\Enums\EventSubType;
+use romanzipp\Twitch\Enums\Scope;
 
 class ChannelPointsCustomRewardRedemptionAddEvent extends BaseEvent
 {
-    public const type = EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD;
+    protected static string $type = EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD;
+
+    protected static array $scopes = [
+        Scope::CHANNEL_READ_REDEMPTIONS, Scope::CHANNEL_MANAGE_REDEMPTIONS,
+    ];
 
     public string $redemptionId;
 
@@ -59,7 +64,7 @@ class ChannelPointsCustomRewardRedemptionAddEvent extends BaseEvent
         $this->redeemedAt = $this->parseCarbon($event['redeemed_at']);
     }
 
-    public function subscribe(string $broadcasterId, string $rewardId = null, string $callbackUrl = null): ?string
+    public static function subscribe(string $broadcasterId, string $rewardId = null, string $callbackUrl = null): ?string
     {
         $condition = [
             'broadcaster_user_id' => $broadcasterId,
@@ -69,7 +74,7 @@ class ChannelPointsCustomRewardRedemptionAddEvent extends BaseEvent
             $condition['reward_id'] = $rewardId;
         }
 
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1',
+        return parent::subscribeTo('1',
             $condition, false, $callbackUrl);
     }
 }

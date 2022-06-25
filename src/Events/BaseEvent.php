@@ -15,7 +15,7 @@ use katzen48\Twitch\EventSub\Objects\Transport;
 
 abstract class BaseEvent
 {
-    use Dispatchable, HasEventType;
+    use Dispatchable, HasEventType, HasScopes;
 
     public Subscription $subscription;
 
@@ -59,6 +59,12 @@ abstract class BaseEvent
         $this->subscription->transport->callback = $subscription['transport']['callback'];
 
         $this->subscription->created_at = $this->parseCarbon($subscription['created_at']);
+    }
+
+    protected static function subscribeTo(string $version, array $condition, bool $batching, string $callbackUrl): ?string
+    {
+        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::getType(), $version, $condition,
+            $batching, $callbackUrl);
     }
 
     protected function parseCarbon($timestamp): CarbonInterface

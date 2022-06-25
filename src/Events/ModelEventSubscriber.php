@@ -13,7 +13,7 @@ use katzen48\Twitch\EventSub\TwitchEventSub;
 
 class ModelEventSubscriber
 {
-    public static function onCreate($model)
+    public static function onCreate($model): void
     {
         foreach ($model::$eventSubs as $type => $conditionParameters) {
             /**

@@ -13,10 +13,15 @@ use katzen48\Twitch\EventSub\Objects\ChannelPointsRedemptionCooldown;
 use katzen48\Twitch\EventSub\Objects\ChannelPointsRedemptionLimit;
 use katzen48\Twitch\EventSub\Objects\TwitchCdnImage;
 use romanzipp\Twitch\Enums\EventSubType;
+use romanzipp\Twitch\Enums\Scope;
 
 class ChannelPointsCustomRewardRemoveEvent extends BaseEvent
 {
-    public const type = EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_REMOVE;
+    protected static string $type = EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_REMOVE;
+
+    protected static array $scopes = [
+        Scope::CHANNEL_READ_REDEMPTIONS, Scope::CHANNEL_MANAGE_REDEMPTIONS,
+    ];
 
     public string $rewardId;
 
@@ -72,7 +77,7 @@ class ChannelPointsCustomRewardRemoveEvent extends BaseEvent
         $this->prompt = $event['prompt'];
         $this->userInputRequired = $event['is_user_input_required'];
         $this->redemptionsSkipRequestQueue = $event['should_redemptions_skip_request_queue'];
-        $this->cooldownExpiresAt = $this->parseCarbon($event['cooldown_expires_at']) ?? null;
+        $this->cooldownExpiresAt = $this->parseCarbon($event['cooldown_expires_at']);
         $this->redemptionsRedeemedCurrentStream = $event['redemptions_redeemed_current_stream'];
 
         $this->maxPerStream = new ChannelPointsRedemptionLimit;
@@ -100,7 +105,7 @@ class ChannelPointsCustomRewardRemoveEvent extends BaseEvent
         $this->defaultImage->url4x = $event['default_image']['url_4x'];
     }
 
-    public function subscribe(string $broadcasterId, string $rewardId = null, string $callbackUrl = null): ?string
+    public static function subscribe(string $broadcasterId, string $rewardId = null, string $callbackUrl = null): ?string
     {
         $condition = [
             'broadcaster_user_id' => $broadcasterId,
@@ -110,7 +115,7 @@ class ChannelPointsCustomRewardRemoveEvent extends BaseEvent
             $condition['reward_id'] = $rewardId;
         }
 
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1',
+        return parent::subscribeTo('1',
             $condition, false, $callbackUrl);
     }
 }

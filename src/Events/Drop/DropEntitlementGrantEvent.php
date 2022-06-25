@@ -15,7 +15,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 
 class DropEntitlementGrantEvent extends BaseEvent
 {
-    public const type = EventSubType::DROP_ENTITLEMENT_GRANT;
+    protected static string $type = EventSubType::DROP_ENTITLEMENT_GRANT;
 
     public Collection|DropEntitlementEvent $events;
 
@@ -42,7 +42,7 @@ class DropEntitlementGrantEvent extends BaseEvent
         }
     }
 
-    public function subscribe(string $organizationId, string $categoryId = null, string $campaignId = null, string $callbackUrl = null): ?string
+    public static function subscribe(string $organizationId, string $categoryId = null, string $campaignId = null, string $callbackUrl = null): ?string
     {
         $condition = [
             'organization_id' => $organizationId,
@@ -56,7 +56,7 @@ class DropEntitlementGrantEvent extends BaseEvent
             $condition['campaign_id'] = $campaignId;
         }
 
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1',
+        return parent::subscribeTo('1',
             $condition, false, $callbackUrl);
     }
 }

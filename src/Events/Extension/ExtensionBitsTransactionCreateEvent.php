@@ -12,7 +12,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 
 class ExtensionBitsTransactionCreateEvent extends BaseEvent
 {
-    public const type = EventSubType::EXTENSION_BITS_TRANSACTION_CREATE;
+    protected static string $type = EventSubType::EXTENSION_BITS_TRANSACTION_CREATE;
 
     public string $extensionClientId;
 
@@ -42,9 +42,9 @@ class ExtensionBitsTransactionCreateEvent extends BaseEvent
         $this->product = $event['product'];
     }
 
-    public function subscribe(string $extensionClientId, string $callbackUrl = null): ?string
+    public static function subscribe(string $extensionClientId, string $callbackUrl = null): ?string
     {
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+        return parent::subscribeTo('1', [
             'extension_client_id' => $extensionClientId,
         ], false, $callbackUrl);
     }

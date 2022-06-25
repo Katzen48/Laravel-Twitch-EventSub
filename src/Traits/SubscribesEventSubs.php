@@ -22,7 +22,7 @@ trait SubscribesEventSubs
             return;
         }
 
-        static::created(function ($model) {
+        static::created(static function ($model) {
             ModelEventSubscriber::onCreate($model);
         });
     }

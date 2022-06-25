@@ -12,7 +12,11 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 
 class ChannelGoalEndEvent extends BaseEvent
 {
-    public const type = 'channel.goal.end'; // TODO change to EventSubType::CHANNEL_GOAL_END
+    protected static string $type = 'channel.goal.end'; // TODO change to EventSubType::CHANNEL_GOAL_END
+
+    protected static array $scopes = [
+        'channel:read:goals', // TODO change to Scope::CHANNEL_READ_GOALS
+    ];
 
     public string $id;
 
@@ -22,7 +26,7 @@ class ChannelGoalEndEvent extends BaseEvent
 
     public string $broadcasterName;
 
-    public string $type;
+    public string $goalType;
 
     public string $description;
 
@@ -42,7 +46,7 @@ class ChannelGoalEndEvent extends BaseEvent
         $this->broadcasterId = $event['broadcaster_user_id'];
         $this->broadcasterLogin = $event['broadcaster_user_login'];
         $this->broadcasterName = $event['broadcaster_user_name'];
-        $this->type = $event['type'];
+        $this->goalType = $event['type'];
         $this->description = $event['description'];
         $this->achieved = $event['is_achieved'];
         $this->currentAmount = $event['current_amount'];
@@ -53,22 +57,22 @@ class ChannelGoalEndEvent extends BaseEvent
 
     public function isFollower(): bool
     {
-        return $this->type === 'follower';
+        return $this->goalType === 'follower';
     }
 
     public function isSubscription(): bool
     {
-        return $this->type === 'subscription';
+        return $this->goalType === 'subscription';
     }
 
     public function isNewSubscription(): bool
     {
-        return $this->type === 'new_subscription';
+        return $this->goalType === 'new_subscription';
     }
 
-    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+        return parent::subscribeTo('1', [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }
