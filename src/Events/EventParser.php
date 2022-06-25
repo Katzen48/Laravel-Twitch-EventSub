@@ -29,63 +29,63 @@ class EventParser
     {
         return [
             // Stream
-            Stream\StreamOfflineEvent::type => Stream\StreamOfflineEvent::class,
-            Stream\StreamOnlineEvent::type => Stream\StreamOnlineEvent::class,
+            Stream\StreamOfflineEvent::getType() => Stream\StreamOfflineEvent::class,
+            Stream\StreamOnlineEvent::getType() => Stream\StreamOnlineEvent::class,
 
             // Channel
-            Channel\ChannelBanEvent::type => Channel\ChannelBanEvent::class,
-            Channel\ChannelCheerEvent::type => Channel\ChannelCheerEvent::class,
-            Channel\ChannelFollowEvent::type => Channel\ChannelFollowEvent::class,
-            Channel\ChannelModeratorAddEvent::type => Channel\ChannelModeratorAddEvent::class,
-            Channel\ChannelModeratorRemoveEvent::type => Channel\ChannelModeratorRemoveEvent::class,
-            Channel\ChannelRaidEvent::type => Channel\ChannelRaidEvent::class,
-            Channel\ChannelUnbanEvent::type => Channel\ChannelUnbanEvent::class,
-            Channel\ChannelUpdateEvent::type => Channel\ChannelUpdateEvent::class,
+            Channel\ChannelBanEvent::getType() => Channel\ChannelBanEvent::class,
+            Channel\ChannelCheerEvent::getType() => Channel\ChannelCheerEvent::class,
+            Channel\ChannelFollowEvent::getType() => Channel\ChannelFollowEvent::class,
+            Channel\ChannelModeratorAddEvent::getType() => Channel\ChannelModeratorAddEvent::class,
+            Channel\ChannelModeratorRemoveEvent::getType() => Channel\ChannelModeratorRemoveEvent::class,
+            Channel\ChannelRaidEvent::getType() => Channel\ChannelRaidEvent::class,
+            Channel\ChannelUnbanEvent::getType() => Channel\ChannelUnbanEvent::class,
+            Channel\ChannelUpdateEvent::getType() => Channel\ChannelUpdateEvent::class,
 
             // Channel Points
-            Channel\ChannelPoints\ChannelPointsCustomRewardAddEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardAddEvent::class,
-            Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionAddEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionAddEvent::class,
-            Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionUpdateEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionUpdateEvent::class,
-            Channel\ChannelPoints\ChannelPointsCustomRewardRemoveEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardRemoveEvent::class,
-            Channel\ChannelPoints\ChannelPointsCustomRewardUpdateEvent::type => Channel\ChannelPoints\ChannelPointsCustomRewardUpdateEvent::class,
+            Channel\ChannelPoints\ChannelPointsCustomRewardAddEvent::getType() => Channel\ChannelPoints\ChannelPointsCustomRewardAddEvent::class,
+            Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionAddEvent::getType() => Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionAddEvent::class,
+            Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionUpdateEvent::getType() => Channel\ChannelPoints\ChannelPointsCustomRewardRedemptionUpdateEvent::class,
+            Channel\ChannelPoints\ChannelPointsCustomRewardRemoveEvent::getType() => Channel\ChannelPoints\ChannelPointsCustomRewardRemoveEvent::class,
+            Channel\ChannelPoints\ChannelPointsCustomRewardUpdateEvent::getType() => Channel\ChannelPoints\ChannelPointsCustomRewardUpdateEvent::class,
 
             // Goal
-            Channel\Goal\ChannelGoalBeginEvent::type => Channel\Goal\ChannelGoalBeginEvent::class,
-            Channel\Goal\ChannelGoalEndEvent::type => Channel\Goal\ChannelGoalEndEvent::class,
-            Channel\Goal\ChannelGoalProgressEvent::type => Channel\Goal\ChannelGoalProgressEvent::class,
+            Channel\Goal\ChannelGoalBeginEvent::getType() => Channel\Goal\ChannelGoalBeginEvent::class,
+            Channel\Goal\ChannelGoalEndEvent::getType() => Channel\Goal\ChannelGoalEndEvent::class,
+            Channel\Goal\ChannelGoalProgressEvent::getType() => Channel\Goal\ChannelGoalProgressEvent::class,
 
             // Hype Train
-            Channel\HypeTrain\ChannelHypeTrainBeginEvent::type => Channel\HypeTrain\ChannelHypeTrainBeginEvent::class,
-            Channel\HypeTrain\ChannelHypeTrainEndEvent::type => Channel\HypeTrain\ChannelHypeTrainEndEvent::class,
-            Channel\HypeTrain\ChannelHypeTrainProgressEvent::type => Channel\HypeTrain\ChannelHypeTrainProgressEvent::class,
+            Channel\HypeTrain\ChannelHypeTrainBeginEvent::getType() => Channel\HypeTrain\ChannelHypeTrainBeginEvent::class,
+            Channel\HypeTrain\ChannelHypeTrainEndEvent::getType() => Channel\HypeTrain\ChannelHypeTrainEndEvent::class,
+            Channel\HypeTrain\ChannelHypeTrainProgressEvent::getType() => Channel\HypeTrain\ChannelHypeTrainProgressEvent::class,
 
             // Poll
-            Channel\Poll\ChannelPollBeginEvent::type => Channel\Poll\ChannelPollBeginEvent::class,
-            Channel\Poll\ChannelPollEndEvent::type => Channel\Poll\ChannelPollEndEvent::class,
-            Channel\Poll\ChannelPollProgressEvent::type => Channel\Poll\ChannelPollProgressEvent::class,
+            Channel\Poll\ChannelPollBeginEvent::getType() => Channel\Poll\ChannelPollBeginEvent::class,
+            Channel\Poll\ChannelPollEndEvent::getType() => Channel\Poll\ChannelPollEndEvent::class,
+            Channel\Poll\ChannelPollProgressEvent::getType() => Channel\Poll\ChannelPollProgressEvent::class,
 
             // Prediction
-            Channel\Prediction\ChannelPredictionBeginEvent::type => Channel\Prediction\ChannelPredictionBeginEvent::class,
-            Channel\Prediction\ChannelPredictionEndEvent::type => Channel\Prediction\ChannelPredictionEndEvent::class,
-            Channel\Prediction\ChannelPredictionLockEvent::type => Channel\Prediction\ChannelPredictionLockEvent::class,
-            Channel\Prediction\ChannelPredictionProgressEvent::type => Channel\Prediction\ChannelPredictionProgressEvent::class,
+            Channel\Prediction\ChannelPredictionBeginEvent::getType() => Channel\Prediction\ChannelPredictionBeginEvent::class,
+            Channel\Prediction\ChannelPredictionEndEvent::getType() => Channel\Prediction\ChannelPredictionEndEvent::class,
+            Channel\Prediction\ChannelPredictionLockEvent::getType() => Channel\Prediction\ChannelPredictionLockEvent::class,
+            Channel\Prediction\ChannelPredictionProgressEvent::getType() => Channel\Prediction\ChannelPredictionProgressEvent::class,
 
             // Subscription
-            Channel\Subscription\ChannelSubscribeEvent::type => Channel\Subscription\ChannelSubscribeEvent::class,
-            Channel\Subscription\ChannelSubscriptionEndEvent::type => Channel\Subscription\ChannelSubscriptionEndEvent::class,
-            Channel\Subscription\ChannelSubscriptionGiftEvent::type => Channel\Subscription\ChannelSubscriptionGiftEvent::class,
-            Channel\Subscription\ChannelSubscriptionMessageEvent::type => Channel\Subscription\ChannelSubscriptionMessageEvent::class,
+            Channel\Subscription\ChannelSubscribeEvent::getType() => Channel\Subscription\ChannelSubscribeEvent::class,
+            Channel\Subscription\ChannelSubscriptionEndEvent::getType() => Channel\Subscription\ChannelSubscriptionEndEvent::class,
+            Channel\Subscription\ChannelSubscriptionGiftEvent::getType() => Channel\Subscription\ChannelSubscriptionGiftEvent::class,
+            Channel\Subscription\ChannelSubscriptionMessageEvent::getType() => Channel\Subscription\ChannelSubscriptionMessageEvent::class,
 
             // Drop
-            Drop\DropEntitlementGrantEvent::type => Drop\DropEntitlementGrantEvent::class,
+            Drop\DropEntitlementGrantEvent::getType() => Drop\DropEntitlementGrantEvent::class,
 
             // Extension
-            Extension\ExtensionBitsTransactionCreateEvent::type => Extension\ExtensionBitsTransactionCreateEvent::class,
+            Extension\ExtensionBitsTransactionCreateEvent::getType() => Extension\ExtensionBitsTransactionCreateEvent::class,
 
             // User
-            User\UserAuthorizationGrantEvent::type => User\UserAuthorizationGrantEvent::class,
-            User\UserAuthorizationRevokeEvent::type => User\UserAuthorizationRevokeEvent::class,
-            User\UserUpdateEvent::type => User\UserUpdateEvent::class,
+            User\UserAuthorizationGrantEvent::getType() => User\UserAuthorizationGrantEvent::class,
+            User\UserAuthorizationRevokeEvent::getType() => User\UserAuthorizationRevokeEvent::class,
+            User\UserUpdateEvent::getType() => User\UserUpdateEvent::class,
         ];
     }
 }

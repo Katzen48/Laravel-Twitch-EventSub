@@ -10,9 +10,12 @@ namespace katzen48\Twitch\EventSub\Events\User;
 use katzen48\Twitch\EventSub\Events\BaseEvent;
 use romanzipp\Twitch\Enums\EventSubType;
 
+/**
+ * Even though no scope is required, a client id with Scope::USER_READ_EMAIL returns $email and $emailVerified
+ */
 class UserUpdateEvent extends BaseEvent
 {
-    public const type = EventSubType::USER_UPDATE;
+    protected static string $type = EventSubType::USER_UPDATE;
 
     public string $userId;
 
@@ -36,9 +39,9 @@ class UserUpdateEvent extends BaseEvent
         $this->description = $event['description'];
     }
 
-    public function subscribe(string $userId, string $callbackUrl = null): ?string
+    public static function subscribe(string $userId, string $callbackUrl = null): ?string
     {
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+        return parent::subscribeTo('1', [
             'user_id' => $userId,
         ], false, $callbackUrl);
     }

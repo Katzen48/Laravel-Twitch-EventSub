@@ -13,10 +13,15 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 use katzen48\Twitch\EventSub\Objects\ChannelPredictionOutcomeProgressed;
 use katzen48\Twitch\EventSub\Objects\ChannelPredictionPredictor;
 use romanzipp\Twitch\Enums\EventSubType;
+use romanzipp\Twitch\Enums\Scope;
 
 class ChannelPredictionEndEvent extends BaseEvent
 {
-    public const type = EventSubType::CHANNEL_PREDICTION_END;
+    protected static string $type = EventSubType::CHANNEL_PREDICTION_END;
+
+    protected static array $scopes = [
+        Scope::CHANNEL_READ_PREDICTIONS, Scope::CHANNEL_MANAGE_PREDICTIONS,
+    ];
 
     public string $id;
 
@@ -79,9 +84,9 @@ class ChannelPredictionEndEvent extends BaseEvent
         $this->endedAt = $this->parseCarbon($event['ended_at']);
     }
 
-    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+        return parent::subscribeTo('1', [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

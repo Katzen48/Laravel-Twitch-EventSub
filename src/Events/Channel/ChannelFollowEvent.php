@@ -13,7 +13,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 
 class ChannelFollowEvent extends BaseEvent
 {
-    public const type = EventSubType::CHANNEL_FOLLOW;
+    protected static string $type = EventSubType::CHANNEL_FOLLOW;
 
     public string $followerId;
 
@@ -40,9 +40,9 @@ class ChannelFollowEvent extends BaseEvent
         $this->followedAt = $this->parseCarbon($event['followed_at']);
     }
 
-    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+        return parent::subscribeTo('1', [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

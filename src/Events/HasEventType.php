@@ -9,8 +9,10 @@ namespace katzen48\Twitch\EventSub\Events;
 
 trait HasEventType
 {
-    public function getType(): string
+    protected static string $type;
+
+    public static function getType(): string
     {
-        return self::type;
+        return self::$type;
     }
 }

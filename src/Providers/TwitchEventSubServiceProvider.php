@@ -48,7 +48,7 @@ class TwitchEventSubServiceProvider extends \Illuminate\Support\ServiceProvider
         });
     }
 
-    public function provides()
+    public function provides(): array
     {
         return [TwitchEventSub::class];
     }

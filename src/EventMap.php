@@ -9,7 +9,7 @@ namespace katzen48\Twitch\EventSub;
  */
 trait EventMap
 {
-    protected $events = [
+    protected array $events = [
         \romanzipp\Twitch\Events\EventSubReceived::class => [
             \katzen48\Twitch\EventSub\Listeners\EventSubListener::class,
         ],

@@ -13,7 +13,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 
 class StreamOnlineEvent extends BaseEvent
 {
-    public const type = EventSubType::STREAM_ONLINE;
+    protected static string $type = EventSubType::STREAM_ONLINE;
 
     public string $streamId;
 
@@ -23,7 +23,7 @@ class StreamOnlineEvent extends BaseEvent
 
     public string $broadcasterName;
 
-    public string $type;
+    public string $streamType;
 
     public CarbonInterface $startedAt;
 
@@ -33,13 +33,13 @@ class StreamOnlineEvent extends BaseEvent
         $this->broadcasterId = $event['broadcaster_user_id'];
         $this->broadcasterLogin = $event['broadcaster_user_login'];
         $this->broadcasterName = $event['broadcaster_user_name'];
-        $this->type = $event['type'];
+        $this->streamType = $event['type'];
         $this->startedAt = $this->parseCarbon($event['started_at']);
     }
 
-    public function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
+    public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return \katzen48\Twitch\EventSub\Facades\TwitchEventSub::subscribeEvent(self::type, '1', [
+        return parent::subscribeTo('1', [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

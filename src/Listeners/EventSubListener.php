@@ -12,7 +12,7 @@ use romanzipp\Twitch\Events\EventSubReceived;
  */
 class EventSubListener
 {
-    public function handle(EventSubReceived $eventSub)
+    public function handle(EventSubReceived $eventSub): void
     {
         /**
          * @var $event \Illuminate\Foundation\Events\Dispatchable

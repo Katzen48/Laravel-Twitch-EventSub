@@ -19,7 +19,7 @@ use katzen48\Twitch\EventSub\TwitchEventSub as TwitchEventSubService;
  */
 class TwitchEventSub extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return TwitchEventSubService::class;
     }
