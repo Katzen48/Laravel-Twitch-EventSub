@@ -13,6 +13,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class ChannelUpdateEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_UPDATE;
+
     protected static string $version = '1';
 
     public string $userId;

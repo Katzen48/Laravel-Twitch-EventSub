@@ -13,6 +13,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class ExtensionBitsTransactionCreateEvent extends BaseEvent
 {
     protected static string $type = EventSubType::EXTENSION_BITS_TRANSACTION_CREATE;
+
     protected static string $version = '1';
 
     public string $extensionClientId;

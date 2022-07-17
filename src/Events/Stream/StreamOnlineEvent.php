@@ -14,6 +14,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class StreamOnlineEvent extends BaseEvent
 {
     protected static string $type = EventSubType::STREAM_ONLINE;
+
     protected static string $version = '1';
 
     public string $streamId;

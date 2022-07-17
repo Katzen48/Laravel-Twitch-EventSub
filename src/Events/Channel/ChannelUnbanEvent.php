@@ -14,6 +14,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelUnbanEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_UNBAN;
+
     protected static string $version = '1';
 
     protected static array $scopes = [

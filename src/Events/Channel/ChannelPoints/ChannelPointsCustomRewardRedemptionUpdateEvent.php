@@ -16,6 +16,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelPointsCustomRewardRedemptionUpdateEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_UPDATE;
+
     protected static string $version = '1';
 
     protected static array $scopes = [

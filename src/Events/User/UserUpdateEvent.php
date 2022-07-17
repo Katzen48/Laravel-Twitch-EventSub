@@ -16,6 +16,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class UserUpdateEvent extends BaseEvent
 {
     protected static string $type = EventSubType::USER_UPDATE;
+
     protected static string $version = '1';
 
     public string $userId;

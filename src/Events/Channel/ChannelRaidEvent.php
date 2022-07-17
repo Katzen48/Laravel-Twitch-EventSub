@@ -13,6 +13,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class ChannelRaidEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_RAID;
+
     protected static string $version = '1';
 
     public string $fromBroadcasterId;

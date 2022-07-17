@@ -14,6 +14,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelSubscriptionMessageEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_SUBSCRIPTION_MESSAGE;
+
     protected static string $version = '1';
 
     protected static array $scopes = [

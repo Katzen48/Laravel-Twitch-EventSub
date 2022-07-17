@@ -17,6 +17,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelPredictionBeginEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_PREDICTION_BEGIN;
+
     protected static string $version = '1';
 
     protected static array $scopes = [

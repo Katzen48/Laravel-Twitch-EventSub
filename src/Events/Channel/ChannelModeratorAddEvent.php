@@ -14,6 +14,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelModeratorAddEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_MODERATOR_ADD;
+
     protected static string $version = '1';
 
     protected static array $scopes = [

@@ -15,6 +15,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelGoalBeginEvent extends BaseEvent
 {
     protected static string $type = 'channel.goal.begin'; // TODO change to EventSubType::CHANNEL_GOAL_BEGIN
+
     protected static string $version = '1';
 
     protected static array $scopes = [

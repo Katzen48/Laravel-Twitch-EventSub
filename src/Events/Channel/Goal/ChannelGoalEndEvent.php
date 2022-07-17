@@ -13,6 +13,7 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 class ChannelGoalEndEvent extends BaseEvent
 {
     protected static string $type = 'channel.goal.end'; // TODO change to EventSubType::CHANNEL_GOAL_END
+
     protected static string $version = '1';
 
     protected static array $scopes = [

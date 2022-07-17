@@ -18,6 +18,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelPollBeginEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_POLL_BEGIN;
+
     protected static string $version = '1';
 
     protected static array $scopes = [

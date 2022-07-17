@@ -13,6 +13,7 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 class ChannelGoalProgressEvent extends BaseEvent
 {
     protected static string $type = 'channel.goal.progress'; // TODO change to EventSubType::CHANNEL_GOAL_PROGRESS
+
     protected static string $version = '1';
 
     protected static array $scopes = [

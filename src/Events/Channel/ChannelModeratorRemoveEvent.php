@@ -14,6 +14,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelModeratorRemoveEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_MODERATOR_REMOVE;
+
     protected static string $version = '1';
 
     protected static array $scopes = [

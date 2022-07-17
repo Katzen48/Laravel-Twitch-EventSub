@@ -18,6 +18,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelPredictionEndEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_PREDICTION_END;
+
     protected static string $version = '1';
 
     protected static array $scopes = [

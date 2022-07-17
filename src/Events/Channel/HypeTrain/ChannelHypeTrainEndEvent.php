@@ -17,6 +17,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelHypeTrainEndEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_HYPE_TRAIN_END;
+
     protected static string $version = '1';
 
     protected static array $scopes = [

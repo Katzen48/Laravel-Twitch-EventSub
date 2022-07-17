@@ -13,6 +13,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class UserAuthorizationGrantEvent extends BaseEvent
 {
     protected static string $type = EventSubType::USER_AUTHORIZATION_GRANT;
+
     protected static string $version = '1';
 
     public string $clientId;

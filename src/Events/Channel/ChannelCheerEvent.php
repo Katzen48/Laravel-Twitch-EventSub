@@ -14,6 +14,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelCheerEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_CHEER;
+
     protected static string $version = '1';
 
     protected static array $scopes = [
