@@ -19,6 +19,8 @@ class ChannelPointsCustomRewardAddEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARDS_ADD;
 
+    protected static string $version = '1';
+
     protected static array $scopes = [
         Scope::CHANNEL_READ_REDEMPTIONS, Scope::CHANNEL_MANAGE_REDEMPTIONS,
     ];
@@ -107,7 +109,7 @@ class ChannelPointsCustomRewardAddEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

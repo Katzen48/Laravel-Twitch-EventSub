@@ -14,6 +14,8 @@ class ChannelRaidEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_RAID;
 
+    protected static string $version = '1';
+
     public string $fromBroadcasterId;
 
     public string $fromBroadcasterLogin;
@@ -41,7 +43,7 @@ class ChannelRaidEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, bool $to = false, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             sprintf('%s_broadcaster_user_id', $to ? 'to' : 'from') => $broadcasterId,
         ], false, $callbackUrl);
     }

@@ -17,6 +17,8 @@ class DropEntitlementGrantEvent extends BaseEvent
 {
     protected static string $type = EventSubType::DROP_ENTITLEMENT_GRANT;
 
+    protected static string $version = '1';
+
     public Collection|DropEntitlementEvent $events;
 
     public function parseEvent($event): void
@@ -56,7 +58,7 @@ class DropEntitlementGrantEvent extends BaseEvent
             $condition['campaign_id'] = $campaignId;
         }
 
-        return parent::subscribeTo('1',
+        return parent::subscribeTo(self::getVersion(),
             $condition, false, $callbackUrl);
     }
 }

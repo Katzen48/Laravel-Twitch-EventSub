@@ -16,6 +16,8 @@ class ChannelBanEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_BAN;
 
+    protected static string $version = '1';
+
     protected static array $scopes = [
         Scope::CHANNEL_MODERATE,
     ];
@@ -65,7 +67,7 @@ class ChannelBanEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

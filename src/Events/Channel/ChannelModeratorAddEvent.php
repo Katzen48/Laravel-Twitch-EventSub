@@ -15,6 +15,8 @@ class ChannelModeratorAddEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_MODERATOR_ADD;
 
+    protected static string $version = '1';
+
     protected static array $scopes = [
         Scope::MODERATION_READ,
     ];
@@ -43,7 +45,7 @@ class ChannelModeratorAddEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

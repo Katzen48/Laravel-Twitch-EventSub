@@ -15,6 +15,8 @@ class ChannelSubscriptionGiftEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_SUBSCRIPTION_GIFT;
 
+    protected static string $version = '1';
+
     protected static array $scopes = [
         Scope::CHANNEL_READ_SUBSCRIPTIONS,
     ];
@@ -55,7 +57,7 @@ class ChannelSubscriptionGiftEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

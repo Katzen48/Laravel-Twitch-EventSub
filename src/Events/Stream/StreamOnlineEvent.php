@@ -15,6 +15,8 @@ class StreamOnlineEvent extends BaseEvent
 {
     protected static string $type = EventSubType::STREAM_ONLINE;
 
+    protected static string $version = '1';
+
     public string $streamId;
 
     public string $broadcasterId;
@@ -39,7 +41,7 @@ class StreamOnlineEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }
