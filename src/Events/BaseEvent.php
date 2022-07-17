@@ -12,6 +12,8 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Support\Carbon;
 use katzen48\Twitch\EventSub\Objects\Subscription;
 use katzen48\Twitch\EventSub\Objects\Transport;
+use katzen48\Twitch\EventSub\Traits\HasEventType;
+use katzen48\Twitch\EventSub\Traits\HasScopes;
 
 abstract class BaseEvent
 {

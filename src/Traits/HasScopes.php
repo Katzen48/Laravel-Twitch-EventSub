@@ -5,7 +5,7 @@
  * Time: 10:57 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events;
+namespace katzen48\Twitch\EventSub\Traits;
 
 trait HasScopes
 {
@@ -18,6 +18,6 @@ trait HasScopes
      */
     public static function getScopes(): array
     {
-        return self::$scopes;
+        return static::$scopes;
     }
 }

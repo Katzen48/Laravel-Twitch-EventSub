@@ -5,7 +5,7 @@
  * Time: 10:57 PM
  */
 
-namespace katzen48\Twitch\EventSub\Events;
+namespace katzen48\Twitch\EventSub\Traits;
 
 trait HasEventType
 {
@@ -15,11 +15,11 @@ trait HasEventType
 
     public static function getType(): string
     {
-        return self::$type;
+        return static::$type;
     }
 
     public static function getVersion(): string
     {
-        return self::$version;
+        return static::$version;
     }
 }
