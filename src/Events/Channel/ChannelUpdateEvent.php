@@ -13,6 +13,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class ChannelUpdateEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_UPDATE;
+    protected static string $version = '1';
 
     public string $userId;
 
@@ -44,7 +45,7 @@ class ChannelUpdateEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

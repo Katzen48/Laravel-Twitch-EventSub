@@ -13,6 +13,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class UserAuthorizationRevokeEvent extends BaseEvent
 {
     protected static string $type = EventSubType::USER_AUTHORIZATION_REVOKE;
+    protected static string $version = '1';
 
     public string $clientId;
 
@@ -32,7 +33,7 @@ class UserAuthorizationRevokeEvent extends BaseEvent
 
     public static function subscribe(string $clientId = null, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'client_id' => $clientId ?? \katzen48\Twitch\EventSub\Facades\TwitchEventSub::getClientId(),
         ], false, $callbackUrl);
     }

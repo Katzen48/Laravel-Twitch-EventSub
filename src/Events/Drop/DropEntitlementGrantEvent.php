@@ -16,6 +16,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class DropEntitlementGrantEvent extends BaseEvent
 {
     protected static string $type = EventSubType::DROP_ENTITLEMENT_GRANT;
+    protected static string $version = '1';
 
     public Collection|DropEntitlementEvent $events;
 
@@ -56,7 +57,7 @@ class DropEntitlementGrantEvent extends BaseEvent
             $condition['campaign_id'] = $campaignId;
         }
 
-        return parent::subscribeTo('1',
+        return parent::subscribeTo(self::getVersion(),
             $condition, false, $callbackUrl);
     }
 }

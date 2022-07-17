@@ -16,6 +16,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelPointsCustomRewardRedemptionAddEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_CHANNEL_POINTS_CUSTOM_REWARD_REDEMPTION_ADD;
+    protected static string $version = '1';
 
     protected static array $scopes = [
         Scope::CHANNEL_READ_REDEMPTIONS, Scope::CHANNEL_MANAGE_REDEMPTIONS,
@@ -74,7 +75,7 @@ class ChannelPointsCustomRewardRedemptionAddEvent extends BaseEvent
             $condition['reward_id'] = $rewardId;
         }
 
-        return parent::subscribeTo('1',
+        return parent::subscribeTo(self::getVersion(),
             $condition, false, $callbackUrl);
     }
 }

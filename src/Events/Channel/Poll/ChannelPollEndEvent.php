@@ -18,6 +18,7 @@ use romanzipp\Twitch\Enums\Scope;
 class ChannelPollEndEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_POLL_END;
+    protected static string $version = '1';
 
     protected static array $scopes = [
         Scope::CHANNEL_READ_POLLS, Scope::CHANNEL_MANAGE_POLLS,
@@ -83,7 +84,7 @@ class ChannelPollEndEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

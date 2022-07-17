@@ -14,6 +14,7 @@ use romanzipp\Twitch\Enums\EventSubType;
 class ChannelFollowEvent extends BaseEvent
 {
     protected static string $type = EventSubType::CHANNEL_FOLLOW;
+    protected static string $version = '1';
 
     public string $followerId;
 
@@ -42,7 +43,7 @@ class ChannelFollowEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }

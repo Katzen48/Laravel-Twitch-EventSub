@@ -13,6 +13,7 @@ use katzen48\Twitch\EventSub\Events\BaseEvent;
 class ChannelGoalProgressEvent extends BaseEvent
 {
     protected static string $type = 'channel.goal.progress'; // TODO change to EventSubType::CHANNEL_GOAL_PROGRESS
+    protected static string $version = '1';
 
     protected static array $scopes = [
         'channel:read:goals', // TODO change to Scope::CHANNEL_READ_GOALS
@@ -69,7 +70,7 @@ class ChannelGoalProgressEvent extends BaseEvent
 
     public static function subscribe(string $broadcasterId, string $callbackUrl = null): ?string
     {
-        return parent::subscribeTo('1', [
+        return parent::subscribeTo(self::getVersion(), [
             'broadcaster_user_id' => $broadcasterId,
         ], false, $callbackUrl);
     }
